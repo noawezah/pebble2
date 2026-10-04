@@ -23,6 +23,7 @@
 }
 .cafe-header {
   height: 88px;
+  border-bottom: 0;
   position: sticky;
   top: 0;
   z-index: 50;
