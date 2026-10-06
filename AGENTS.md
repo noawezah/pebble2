@@ -2,7 +2,11 @@
 
 Work in `C:\Users\HP\Documents\ChatGPT\pebble2` for this experiment. The destination repository is `https://github.com/noawezah/pebble2`; `origin` points there. The sibling `pebble` checkout is the original site and must remain separate. `upstream` records the original repository for comparison, with its push URL disabled.
 
-Read `design.md` before design changes. Keep Next.js and TypeScript. Compare three visual and motion directions in the linked Figma design lab, then implement the selected direction in this repository. Existing `DESIGN_SYSTEM.md` describes the copied baseline and can evolve with the new direction. Preserve confirmed café facts, original photography, and source asset provenance.
+Read `design.md` before design changes. Keep Next.js and TypeScript. The user selected cream and charcoal for PEBBLE. The Bonne Heure reference belongs to Jai Bistrot and must not steer this site's palette. Use ordinary editable Figma layers/components; do not invoke Figma's built-in AI or spend AI credits. The connected Figma tools have reached the Starter-plan call limit; respect that limit.
+
+Preserve the original onyx 3D loading animation and its docking into the header logo. Prepare responsive photographs and fonts behind it, adapting the animation pace to actual readiness. Keep `components/spotlight-vine-rail.tsx` between site sections. Add pleasing artistic motion to photographs, headings, and decorative objects while retaining readable body copy, native scrolling, and reduced-motion support. Preserve confirmed café facts, original photography, and source asset provenance.
+
+Keep the original Fraunces/DM Sans fonts and adaptive menu color transition. Fast loads must still play the complete original 3D intro and smooth docking. The loader has no skip button. Display the address only in the visit details, and retain the user-confirmed 5.0 Google average review section in the new composition. The user prefers concise meaningful updates rather than scheduled progress messages.
 
 Wait until substantial redesign work is ready before creating or linking a new Vercel project. Use a separate project connected to `pebble2` at that stage.
 

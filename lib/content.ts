@@ -38,8 +38,8 @@ export const defaultContent: CafeContent = {
     ro: "Colțul tău\nde liniște.",
   },
   storyText: {
-    en: "Step inside from Mendeleev 10 and feel the city soften. Sunlight through tall windows, leafy plants, textured brick and the warmth of a small, personal café. A cosy, calming corner for good conversations, a quiet chapter and another beautiful cup.",
-    ro: "Intră de pe Mendeleev 10 și lasă agitația orașului la ușă. Lumină prin ferestre înalte, plante, cărămidă cu textură și căldura unei cafenele mici și personale. Un colț intim și liniștitor pentru conversații, câteva pagini și încă o cafea bună.",
+    en: "Step inside and feel the city soften. Sunlight through tall windows, leafy plants, textured brick and the warmth of a small, personal café. A cosy, calming corner for good conversations, a quiet chapter and another beautiful cup.",
+    ro: "Intră și lasă agitația orașului la ușă. Lumină prin ferestre înalte, plante, cărămidă cu textură și căldura unei cafenele mici și personale. Un colț intim și liniștitor pentru conversații, câteva pagini și încă o cafea bună.",
   },
   coffeeText: {
     en: "From Cluj-Napoca to your favourite corner of Bucharest. We serve specialty coffee from MERON, roasted in Transylvania to bring out the character of each origin. Carefully made at our bar, ready to make your day.",

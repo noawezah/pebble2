@@ -3,7 +3,11 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { sculptureSilhouettes } from "@/lib/sculpture-silhouette";
 
-export default function SnailSculpture() {
+export default function SnailSculpture({
+  locale = "en",
+}: {
+  locale?: "en" | "ro";
+}) {
   const host = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const element = host.current;
@@ -11,6 +15,8 @@ export default function SnailSculpture() {
     let disposed = false;
     let cleanup = () => {};
     const controller = new AbortController();
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = window.matchMedia("(max-width: 700px)");
     async function init() {
       const [THREE, { SVGLoader }, { mergeVertices }, svg] = await Promise.all([
         import("three"),
@@ -18,14 +24,19 @@ export default function SnailSculpture() {
         import("three/addons/utils/BufferGeometryUtils.js"),
         fetch("/images/snail-sculpture.svg", {
           signal: controller.signal,
-        }).then((r) => r.text()),
+        }).then((r) => {
+          if (!r.ok) throw new Error("Sculpture unavailable");
+          return r.text();
+        }),
       ]);
       if (disposed || !element) return;
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true,
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+      renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, mobile.matches ? 1.25 : 1.5),
+      );
       renderer.setClearColor(0x000000, 0);
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(35, 1, 1, 1600);
@@ -37,7 +48,18 @@ export default function SnailSculpture() {
         metalness: 0,
       });
       const geometries: InstanceType<typeof THREE.BufferGeometry>[] = [];
-      const outlines: { part: InstanceType<typeof THREE.Mesh>; points: InstanceType<typeof THREE.Vector3>[] }[] = [];
+      const outlines: {
+        part: InstanceType<typeof THREE.Mesh>;
+        points: InstanceType<typeof THREE.Vector3>[];
+      }[] = [];
+      // A failed geometry setup must leave the original SVG visible and release WebGL.
+      cleanup = () => {
+        geometries.forEach((geometry) => geometry.dispose());
+        material.dispose();
+        renderer.dispose();
+        renderer.domElement.remove();
+        delete element.dataset.ready;
+      };
       const paths = new SVGLoader().parse(svg).paths;
       for (const path of paths)
         for (const shape of path.toShapes()) {
@@ -46,9 +68,9 @@ export default function SnailSculpture() {
             bevelEnabled: true,
             bevelThickness: 6,
             bevelSize: 2,
-            bevelSegments: 12,
+            bevelSegments: 8,
             steps: 1,
-            curveSegments: 40,
+            curveSegments: 28,
           });
           raw.deleteAttribute("normal");
           raw.deleteAttribute("uv");
@@ -62,7 +84,12 @@ export default function SnailSculpture() {
           part.name =
             (path.userData?.node as Element | undefined)?.id || "part";
           sculpture.add(part);
-          outlines.push({ part, points: shape.getPoints(24).map(p => new THREE.Vector3(p.x - 125, 156 - p.y, 14)) });
+          outlines.push({
+            part,
+            points: shape
+              .getPoints(24)
+              .map((p) => new THREE.Vector3(p.x - 125, 156 - p.y, 14)),
+          });
         }
       scene.add(sculpture);
       scene.add(new THREE.HemisphereLight(0xffffff, 0x555555, 2.2));
@@ -73,16 +100,16 @@ export default function SnailSculpture() {
       rim.position.set(220, 0, -100);
       scene.add(rim);
       element.appendChild(renderer.domElement);
-      element.dataset.ready = "true";
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-      const mobile = window.matchMedia("(max-width: 700px)");
+      const needsSilhouette = !!element
+        .closest("section")
+        ?.querySelector(".photo-contrast-text");
       let visible = false,
         frame = 0,
         pointerX = 0,
         pointerY = 0;
       const draw = () => {
         frame = 0;
-        if (disposed || !visible) return;
+        if (disposed || !visible || document.hidden) return;
         const bounds = element.getBoundingClientRect();
         const progress = Math.max(
           -1,
@@ -123,18 +150,34 @@ export default function SnailSculpture() {
         });
         element.dataset.assembly = separation < 0.02 ? "joined" : "separated";
         renderer.render(scene, camera);
-        sculptureSilhouettes.set(element, outlines.map(({part, points}) => points.map(point => {
-          const projected = point.clone().applyMatrix4(part.matrixWorld).project(camera);
-          return [(projected.x + 1) * bounds.width / 2, (1 - projected.y) * bounds.height / 2];
-        })));
+        element.dataset.ready = "true";
+        if (needsSilhouette) {
+          sculptureSilhouettes.set(
+            element,
+            outlines.map(({ part, points }) =>
+              points.map((point) => {
+                const projected = point
+                  .clone()
+                  .applyMatrix4(part.matrixWorld)
+                  .project(camera);
+                return [
+                  ((projected.x + 1) * bounds.width) / 2,
+                  ((1 - projected.y) * bounds.height) / 2,
+                ];
+              }),
+            ),
+          );
+        }
         if (!reduced.matches) frame = requestAnimationFrame(draw);
       };
       const requestDraw = () => {
-        if (!frame && visible) frame = requestAnimationFrame(draw);
+        if (!frame && visible && !document.hidden)
+          frame = requestAnimationFrame(draw);
       };
       const resize = new ResizeObserver(() => {
         const width = element.clientWidth,
           height = element.clientHeight;
+        if (!width || !height) return;
         renderer.setSize(width, height);
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
@@ -163,8 +206,15 @@ export default function SnailSculpture() {
         pointerX = 0;
         pointerY = 0;
       };
+      const visibility = () => {
+        if (document.hidden) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        } else requestDraw();
+      };
       element.addEventListener("pointermove", move);
       element.addEventListener("pointerleave", leave);
+      document.addEventListener("visibilitychange", visibility);
       reduced.addEventListener("change", requestDraw);
       mobile.addEventListener("change", requestDraw);
       cleanup = () => {
@@ -174,6 +224,7 @@ export default function SnailSculpture() {
         resize.disconnect();
         element.removeEventListener("pointermove", move);
         element.removeEventListener("pointerleave", leave);
+        document.removeEventListener("visibilitychange", visibility);
         reduced.removeEventListener("change", requestDraw);
         mobile.removeEventListener("change", requestDraw);
         geometries.forEach((g) => g.dispose());
@@ -183,20 +234,37 @@ export default function SnailSculpture() {
         delete element.dataset.ready;
       };
     }
+    let inRange = false;
+    let attempted = false;
+    const begin = () => {
+      if (
+        disposed ||
+        attempted ||
+        !inRange ||
+        reduced.matches ||
+        document.hidden
+      )
+        return;
+      attempted = true;
+      lazy.disconnect();
+      init().catch(() => cleanup());
+    };
     const lazy = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          lazy.disconnect();
-          init().catch(() => {});
-        }
+        inRange = entries[0].isIntersecting;
+        begin();
       },
       { rootMargin: "400px" },
     );
     lazy.observe(element);
+    reduced.addEventListener("change", begin);
+    document.addEventListener("visibilitychange", begin);
     return () => {
       disposed = true;
       controller.abort();
       lazy.disconnect();
+      reduced.removeEventListener("change", begin);
+      document.removeEventListener("visibilitychange", begin);
       cleanup();
     };
   }, []);
@@ -206,14 +274,18 @@ export default function SnailSculpture() {
       className="snail-sculpture"
       ref={host}
       role="img"
-      aria-label="Matte grey three-dimensional PEBBLE snail sculpture"
+      aria-label={
+        locale === "ro"
+          ? "Melcul PEBBLE, un mic îndemn să încetinești"
+          : "The PEBBLE snail, a little reminder to slow down"
+      }
     >
       <Image
         className="snail-fallback"
         src="/images/snail.svg"
         alt=""
         fill
-        sizes="40vw"
+        sizes="(max-width: 700px) 56vw, 240px"
       />
     </div>
   );

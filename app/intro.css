@@ -1,6 +1,55 @@
-.cafe-intro { position: fixed; inset: 0; z-index: 1000; isolation: isolate; color: var(--charcoal); }
-.cafe-intro[hidden] { display: none; }
-.intro-backdrop { position: absolute; inset: 0; background: var(--paper); }
-.intro-stage { position: absolute; inset: 0; pointer-events: none; }
-.intro-stage canvas { display: block; }
-@media (prefers-reduced-motion: reduce) { .cafe-intro { display: none; } }
+.cafe-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  isolation: isolate;
+  color: var(--charcoal);
+}
+.cafe-intro[hidden] {
+  display: none;
+}
+.cafe-intro:focus {
+  outline: none;
+}
+.intro-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+}
+.intro-stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.intro-stage canvas {
+  display: block;
+}
+.intro-static {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  pointer-events: none;
+}
+.cafe-intro[data-phase="static"] .intro-static {
+  display: grid;
+}
+.intro-static svg {
+  width: min(58vw, 37vh, 250px);
+  height: auto;
+}
+.intro-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-stage {
+    display: none;
+  }
+}
