@@ -4,7 +4,7 @@ The independent redesign and Figma workflow experiment for PEBBLE. This reposito
 
 - Repository: https://github.com/noawezah/pebble2
 - Working folder: `C:\Users\HP\Documents\ChatGPT\pebble2`
-- Figma design lab: https://www.figma.com/design/dRLqgYzHIKn3L2FJ1xwFYA
+- Figma design lab: https://www.figma.com/design/dRLqgYzHIKn3L2FJ1xwFYA?node-id=2-2
 - Direction and workflow: [design.md](design.md)
 
 The copied site is the comparison baseline. Its existing brand rules below describe that baseline; the new visual direction has not been selected. The original `pebble` repository and deployment remain separate. A new Vercel project will be set up after substantial redesign work.
@@ -18,7 +18,7 @@ An English-first, Romanian-second specialty café site for PEBBLE, Bucharest. Ne
 - `/design-system` — interactive visual system, in both languages
 - `/studio` — Sanity Studio (requires a project)
 
-Run `npm ci`, then `npm run dev`, from the `pebble2` folder. Use the exact URL printed by Next.js; port 3000 may be occupied. `npm run build` creates the Vercel-compatible production build. `npm run typecheck` checks TypeScript, and `npm run lint` checks source quality. The initial stack remains Next.js 16.3.5, React 19.2.8, and TypeScript.
+Run `npm ci`, then `npm run dev`, from the `pebble2` folder. Use the exact URL printed by Next.js; port 3000 may be occupied. `npm run build` creates the Vercel-compatible production build. `npm run typecheck` checks TypeScript, and `npm run lint` checks source quality. The stack remains Next.js, React 19.2.8, and TypeScript; Next.js and its lint configuration are patched to 16.3.8.
 
 ## Brand and content
 

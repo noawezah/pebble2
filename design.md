@@ -8,7 +8,7 @@ The copied baseline is original Pebble commit `6841fcb1f831b05a48d44a8445743f360
 
 - New repository: https://github.com/noawezah/pebble2
 - New working folder: `C:\Users\HP\Documents\ChatGPT\pebble2`
-- Figma design lab: https://www.figma.com/design/dRLqgYzHIKn3L2FJ1xwFYA
+- Figma design lab: https://www.figma.com/design/dRLqgYzHIKn3L2FJ1xwFYA?node-id=2-2
 - Original repository: https://github.com/noawezah/pebble
 
 ## Taste recovered from earlier chats
@@ -26,8 +26,8 @@ Sources: “Assess Figma for Pebble site”, “Update project for new devices�
 These are exploration prompts, not approved designs. No direction has been selected.
 
 1. **Kinetic monochrome.** Off-white and charcoal, with green supplied by café photography. Oversized rounded typography, asymmetrical photo composition, and controlled text or object movement. Explore a more expressive version of the existing identity.
-2. **Café poster.** Warm paper, inky plum, and a copper accent. Bold display typography, playful poster-like crops, layered photography, and rhythmic movement. Explore a clearly different palette and composition.
-3. **After hours.** Deep ink, moss, and lamp amber. Atmospheric café photography, immersive transitions, and a tactile central object. Explore a darker and more spatial direction without sacrificing readability.
+2. **Art-poster café.** Warm paper, inky plum, and a copper accent. Bold display typography, playful poster-like crops, layered photography, and rhythmic movement. Explore a clearly different palette and composition.
+3. **After-hours garden.** Deep ink, moss, and lamp amber. Atmospheric café photography, immersive transitions, and a tactile central object. Explore a darker and more spatial direction without sacrificing readability.
 
 Palette, fonts, composition, and interaction details remain open. The initial Figma board is an editable brief, not a completed homepage or a motion prototype.
 
@@ -49,5 +49,17 @@ Keep confirmed café facts and both English and Romanian content available. Pres
 ## Decision record
 
 - 6 October 2026: independent repository and editable Figma brief established; current site retained as the comparison baseline.
+- 6 October 2026: patched Next.js and `eslint-config-next` from 16.3.5 to 16.3.8 after the inherited dependency audit flagged [GHSA-vcvr-r3jv-pc5j](https://github.com/advisories/GHSA-vcvr-r3jv-pc5j). The affected `next/og` / `ImageResponse` API is not used by this site. The original dependency versions remain in the copied baseline history.
 - Selected visual direction: pending.
 - Separate Vercel project: deferred until substantial redesign work.
+
+## Dependency follow-up
+
+After the Next.js patch, npm reports 27 inherited audit findings: 13 high, 13 moderate, and 1 low, with no critical finding remaining. Review the Sanity-related dependency tree and other transitive packages before the eventual production deployment. Some proposed audit fixes require major downgrades, so they need a compatibility review. This setup does not claim that every dependency finding has been resolved.
+
+## Setup verification — 6 October 2026
+
+- Production build, lint, and standalone TypeScript checks pass with Next.js 16.3.8.
+- Application source, content, styles, and assets match the copied baseline; setup changes are limited to documentation and the framework patch.
+- The original checkout remains clean at the baseline commit, with its original remote.
+- The Figma brief board uses native editable text, vector artwork, and auto-layout. Its full composition was visually checked after correcting text sizing. It does not yet include finished webpage concepts or interactive motion.
