@@ -42,7 +42,7 @@ The schema is in `sanity/schema.ts`. Studio authenticates through Sanity; no wri
 
 ## Vercel
 
-GitHub's existing integration connects `noawezah/pebble2` to the separate Vercel project `pebble2` in `ahad-fcea`. Branch previews deploy automatically and require Vercel sign-in. The overhaul is available for review in draft [PR #1](https://github.com/noawezah/pebble2/pull/1). The local checkout has no `.vercel/project.json`; `vercel.json` selects the Next.js framework without a project identity. Before a production release, configure `NEXT_PUBLIC_SITE_URL` for the final HTTPS origin and any public Sanity settings. Keep the original Pebble Vercel project separate.
+GitHub's existing integration connects `noawezah/pebble2` to the separate Vercel project `pebble2` in `ahad-fcea`. Its permanent public URL is [pebble2.vercel.app](https://pebble2.vercel.app), confirmed as a valid Production domain in Vercel. Preserve this URL for every production upload. Branch previews deploy automatically and require Vercel sign-in. The overhaul is available for review in draft [PR #1](https://github.com/noawezah/pebble2/pull/1). The local checkout has no `.vercel/project.json`; `vercel.json` selects the Next.js framework without a project identity. Before building a production release, set Production `NEXT_PUBLIC_SITE_URL=https://pebble2.vercel.app` and any public Sanity settings, then verify the permanent URL after deployment. Keep the original Pebble Vercel project separate.
 
 ## Images
 

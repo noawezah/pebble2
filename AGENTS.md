@@ -12,6 +12,8 @@ Latest composition corrections: slim header (72px desktop, 64px mobile); hero ha
 
 GitHub's existing integration connects this repository to the separate Vercel project `pebble2` in `ahad-fcea`. Branch pushes create previews automatically. Reuse that project for this experiment and keep the original Pebble project separate. The overhaul is being reviewed in draft PR #1; production release remains a later step.
 
+The user requires the permanent public URL `https://pebble2.vercel.app` for Vercel uploads, matching their other repository workflows. Vercel's Domains page confirms that exact hostname has Valid Configuration and is assigned to Production. Keep it assigned to this project for every production release and verify it after uploading. Set Production `NEXT_PUBLIC_SITE_URL=https://pebble2.vercel.app` before building a release. Temporary branch/deployment URLs are for preview review. This URL preference does not by itself request an immediate production release.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
