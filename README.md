@@ -42,6 +42,8 @@ The schema is in `sanity/schema.ts`. Studio authenticates through Sanity; no wri
 
 ## Vercel
 
+The user stages, commits, and pushes from their Codex terminal when changes are ready for publication or phone review. Agent edits remain local and uncommitted unless explicitly requested otherwise. The redesign currently lives on `codex/cream-charcoal-overhaul`, which creates branch previews; publishing to the permanent URL uses the project's Production branch.
+
 GitHub's existing integration connects `noawezah/pebble2` to the separate Vercel project `pebble2` in `ahad-fcea`. Its permanent public URL is [pebble2.vercel.app](https://pebble2.vercel.app), confirmed as a valid Production domain in Vercel. Preserve this URL for every production upload. Branch previews deploy automatically and require Vercel sign-in. The overhaul is available for review in draft [PR #1](https://github.com/noawezah/pebble2/pull/1). The local checkout has no `.vercel/project.json`; `vercel.json` selects the Next.js framework without a project identity. Before building a production release, set Production `NEXT_PUBLIC_SITE_URL=https://pebble2.vercel.app` and any public Sanity settings, then verify the permanent URL after deployment. Keep the original Pebble Vercel project separate.
 
 ## Images

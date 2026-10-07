@@ -56,6 +56,7 @@ Keep confirmed café facts and both English and Romanian content available. Pres
 - Selected visual direction: kinetic monochrome, implemented in `codex/cream-charcoal-overhaul`.
 - Separate Vercel project: GitHub's existing integration connects to `ahad-fcea/pebble2`; branch previews deploy automatically. Production release remains a later step.
 - Permanent public URL: the user requires `https://pebble2.vercel.app` for production uploads. On 7 October, Vercel's Domains page confirmed Valid Configuration and Production assignment for this hostname. Preserve the existing mapping and verify this URL after each release; branch and immutable deployment links remain temporary review addresses.
+- Manual publication workflow: the user runs Git staging, commit, and push themselves in the Codex terminal when changes are worth publishing or ready for phone review. Agent work stays local, unstaged, and uncommitted unless an explicit instruction authorizes a Git or deployment action. Earlier remote commits remain intact.
 
 ## Dependency follow-up
 
