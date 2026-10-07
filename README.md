@@ -7,7 +7,7 @@ The independent redesign and Figma workflow experiment for PEBBLE. This reposito
 - Figma design lab: https://www.figma.com/design/dRLqgYzHIKn3L2FJ1xwFYA?node-id=2-2
 - Direction and workflow: [design.md](design.md)
 
-The copied site remains available in Git history as the comparison baseline. The selected redesign uses cream and charcoal, the original fonts, adaptive menu colors, spotlight/vine dividers, and the original 3D loading choreography. Photography, headings, and decorative objects receive a coordinated motion pass. The original `pebble` repository and deployment remain separate. A new Vercel project will be set up after substantial redesign work.
+The copied site remains available in Git history as the comparison baseline. The selected redesign uses cream and charcoal, the original fonts, adaptive menu colors, spotlight/vine dividers, and the original 3D loading choreography. Photography, headings, and decorative objects receive a coordinated motion pass. The original `pebble` repository and deployment remain separate. GitHub's existing integration creates previews in the separate `pebble2` Vercel project.
 
 An English-first, Romanian-second specialty café site for PEBBLE, Bucharest. Next.js App Router, React, TypeScript, Tailwind CSS, self-hosted Fraunces and DM Sans, Remix Icon, GSAP, and Sanity.
 
@@ -42,7 +42,7 @@ The schema is in `sanity/schema.ts`. Studio authenticates through Sanity; no wri
 
 ## Vercel
 
-This copy is intentionally unlinked from Vercel while the design experiment develops. `vercel.json` selects the Next.js framework and contains no project identity. When substantial redesign work is ready, create a separate Vercel project connected to `noawezah/pebble2`. Use `npm run build`, default Next.js output settings, and any configured public Sanity settings. Set `NEXT_PUBLIC_SITE_URL` to the new project's final HTTPS origin. Keep the original Pebble Vercel project separate.
+GitHub's existing integration connects `noawezah/pebble2` to the separate Vercel project `pebble2` in `ahad-fcea`. Branch previews deploy automatically and require Vercel sign-in. The overhaul is available for review in draft [PR #1](https://github.com/noawezah/pebble2/pull/1). The local checkout has no `.vercel/project.json`; `vercel.json` selects the Next.js framework without a project identity. Before a production release, configure `NEXT_PUBLIC_SITE_URL` for the final HTTPS origin and any public Sanity settings. Keep the original Pebble Vercel project separate.
 
 ## Images
 

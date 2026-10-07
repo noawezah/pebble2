@@ -40,7 +40,7 @@ Selected desktop design: https://www.figma.com/design/dRLqgYzHIKn3L2FJ1xwFYA?nod
 3. Select a direction with the user and record the choice here: palette, typography, grid, photography, motion, and mobile behavior.
 4. Implement in Next.js / TypeScript. Translate reusable design decisions into CSS tokens and appropriately sized components. Read the installed Next.js documentation before code changes, as required by `AGENTS.md`.
 5. Verify the site in the browser at desktop and mobile sizes, including navigation, language switching, readability, reduced motion, and interaction timing. Run lint, type checking, and a production build for substantial code changes.
-6. After substantial redesign work, create a separate Vercel project connected to `pebble2` and configure the new site origin.
+6. Review the branch preview in the separate `pebble2` Vercel project. Configure the final site origin before a production release.
 
 Evaluate Figma through concrete outcomes: how quickly alternatives can be compared and revised, how well the implemented composition matches the selected design, and whether interaction, mobile quality, and loading performance improve. Keep code and browser behavior as part of the evaluation; a static board alone cannot establish that Figma improved the workflow.
 
@@ -54,7 +54,7 @@ Keep confirmed café facts and both English and Romanian content available. Pres
 - 6 October 2026: patched Next.js and `eslint-config-next` from 16.3.5 to 16.3.8 after the inherited dependency audit flagged [GHSA-vcvr-r3jv-pc5j](https://github.com/advisories/GHSA-vcvr-r3jv-pc5j). The affected `next/og` / `ImageResponse` API is not used by this site. The original dependency versions remain in the copied baseline history.
 - 6 October 2026: user selected cream/charcoal and separated PEBBLE's direction from Jai Bistrot. User required the original 3D intro, actual background asset preparation, the original vine dividers, and artistic motion throughout.
 - Selected visual direction: kinetic monochrome, implemented in `codex/cream-charcoal-overhaul`.
-- Separate Vercel project: deferred until substantial redesign work.
+- Separate Vercel project: GitHub's existing integration connects to `ahad-fcea/pebble2`; branch previews deploy automatically. Production release remains a later step.
 
 ## Dependency follow-up
 
@@ -85,4 +85,14 @@ Readiness behavior is covered by `npm test`: bounded queues, final photo decodin
 - Browser checks cover desktop and 320/390px layouts, English/Romanian navigation and document language, native mobile navigation, loaded responsive photos/fonts, the full successful 3D docking path, restored 5.0 review composition, and adaptive header color over the dark coffee section.
 - The loader has no skip control. The full address is rendered only in the visit details. Original font imports, global font settings, and `spotlight-vine-rail.tsx` are unchanged.
 - Screenshots are saved in `docs/previews/`. Figma uses native editable layers, with further connected editing limited by the free Starter-plan quota.
-- The original sibling repository remains clean. No Vercel project or deployment was created.
+- The original sibling repository remains clean. No Vercel project was created by the agent. On 7 October, GitHub's existing integration was confirmed to have automatically deployed the overhaul to the separate `pebble2` project.
+
+## Refinement pass — 7 October 2026
+
+The automatic preview for implementation commit `9579661` was checked in the browser: all seven responsive photographs and fonts were ready, the original intro completed its docking, and the page had no horizontal overflow. Draft [PR #1](https://github.com/noawezah/pebble2/pull/1) contains the overhaul. Protected preview access used the user's existing GitHub sign-in.
+
+Further changes improve mobile caption/label legibility, give language switches 44px touch targets and explicit language names, and make the active navigation section clearer. Responsive image readiness now also waits for a replacement source selected during phone rotation. The small section snail stops rendering after movement settles and restarts when interaction requires it.
+
+New browser inspection was rejected by the automatic browser URL security policy; do not work around that rejection with other browser surfaces or terminal automation. These refinements use source review and automated verification. The previously saved previews document the first overhaul, not a fresh visual check of this refinement pass.
+
+Production build, lint, and TypeScript checks pass for the refinement. Ten readiness tests pass, including the responsive-source replacement regression. The sculpture retains its geometry, scroll assembly, and original easing; cleanup removes every new listener and cancels queued drawing. Original fonts, adaptive header colors, intro choreography, and the vine component remain intact.

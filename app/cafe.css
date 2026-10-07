@@ -28,7 +28,10 @@
 .pebble-coffee-sticker,
 .pebble-photo-caption,
 .pebble-rating-number {
-  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 72;
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1,
+    "opsz" 72;
 }
 .cafe h2 {
   font-size: clamp(42px, 4.5vw, 70px);
@@ -134,6 +137,10 @@
 .pebble-desktop-nav a:hover,
 .pebble-desktop-nav a[data-active="true"] {
   background: #ffffff18;
+}
+.pebble-desktop-nav a[data-active="true"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
 .pebble-header-tools {
   display: flex;
@@ -780,7 +787,7 @@
     gap: 8px;
   }
   .pebble-language a {
-    min-width: 36px;
+    min-width: 44px;
     height: 44px;
   }
   .pebble-mobile-menu {
@@ -832,6 +839,9 @@
     padding-block: 10px;
     border-bottom: 1px solid var(--rule);
     font-size: 16px;
+  }
+  .pebble-mobile-menu nav a[data-active="true"] {
+    font-weight: 700;
   }
   .cafe section[id] {
     scroll-margin-top: 90px;
@@ -931,7 +941,7 @@
     font-size: 15px;
   }
   .pebble-practical .eyebrow {
-    font-size: 9px;
+    font-size: 11px;
   }
   .pebble-section {
     padding-block: 48px;
@@ -940,7 +950,7 @@
     font-size: clamp(39px, 10.8vw, 62px);
   }
   .pebble-section-label {
-    font-size: 10px;
+    font-size: 11px;
     margin-bottom: 17px;
   }
   .pebble-story {
@@ -1005,7 +1015,7 @@
     aspect-ratio: 1.1;
   }
   .pebble-detail-card p {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.5;
   }
   .pebble-counter-copy {
@@ -1060,7 +1070,8 @@
   }
   .pebble-footer-bottom {
     align-items: flex-start;
-    font-size: 9px;
+    font-size: 11px;
+    line-height: 1.55;
     gap: 15px;
   }
   .pebble-footer-bottom > span {
@@ -1069,6 +1080,7 @@
   }
   .pebble-footer-bottom a {
     white-space: nowrap;
+    font-size: 12px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

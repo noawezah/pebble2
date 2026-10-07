@@ -122,10 +122,17 @@ export default function SnailSculpture({
         const targetY = reduced.matches
           ? -0.18
           : progress * 0.5 + pointerX * 0.16;
-        sculpture.rotation.y += (targetY - sculpture.rotation.y) * 0.065;
-        sculpture.rotation.x +=
-          ((reduced.matches ? 0.04 : pointerY * 0.12) - sculpture.rotation.x) *
-          0.065;
+        const targetX = reduced.matches ? 0.04 : pointerY * 0.12;
+        const moving =
+          !reduced.matches &&
+          (Math.abs(targetY - sculpture.rotation.y) > 0.0001 ||
+            Math.abs(targetX - sculpture.rotation.x) > 0.0001);
+        sculpture.rotation.y = moving
+          ? sculpture.rotation.y + (targetY - sculpture.rotation.y) * 0.065
+          : targetY;
+        sculpture.rotation.x = moving
+          ? sculpture.rotation.x + (targetX - sculpture.rotation.x) * 0.065
+          : targetX;
         sculpture.rotation.z =
           (mobile.matches ? Math.PI / 9 : 0) +
           (reduced.matches ? -0.035 : progress * 0.09);
@@ -168,10 +175,11 @@ export default function SnailSculpture({
             ),
           );
         }
-        if (!reduced.matches) frame = requestAnimationFrame(draw);
+        // Once the original easing settles, another interaction restarts drawing.
+        if (moving) frame = requestAnimationFrame(draw);
       };
       const requestDraw = () => {
-        if (!frame && visible && !document.hidden)
+        if (!disposed && !frame && visible && !document.hidden)
           frame = requestAnimationFrame(draw);
       };
       const resize = new ResizeObserver(() => {
@@ -197,14 +205,19 @@ export default function SnailSculpture({
       );
       observer.observe(element);
       const move = (event: PointerEvent) => {
-        if (event.pointerType !== "mouse") return;
+        if (event.pointerType !== "mouse" || reduced.matches) return;
         const b = element.getBoundingClientRect();
         pointerX = (event.clientX - b.left) / b.width - 0.5;
         pointerY = (event.clientY - b.top) / b.height - 0.5;
+        requestDraw();
       };
       const leave = () => {
         pointerX = 0;
         pointerY = 0;
+        if (!reduced.matches) requestDraw();
+      };
+      const scroll = () => {
+        if (!reduced.matches) requestDraw();
       };
       const visibility = () => {
         if (document.hidden) {
@@ -214,6 +227,8 @@ export default function SnailSculpture({
       };
       element.addEventListener("pointermove", move);
       element.addEventListener("pointerleave", leave);
+      window.addEventListener("scroll", scroll, { passive: true });
+      window.addEventListener("resize", requestDraw);
       document.addEventListener("visibilitychange", visibility);
       reduced.addEventListener("change", requestDraw);
       mobile.addEventListener("change", requestDraw);
@@ -224,6 +239,8 @@ export default function SnailSculpture({
         resize.disconnect();
         element.removeEventListener("pointermove", move);
         element.removeEventListener("pointerleave", leave);
+        window.removeEventListener("scroll", scroll);
+        window.removeEventListener("resize", requestDraw);
         document.removeEventListener("visibilitychange", visibility);
         reduced.removeEventListener("change", requestDraw);
         mobile.removeEventListener("change", requestDraw);

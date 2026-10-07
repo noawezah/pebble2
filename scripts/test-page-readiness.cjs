@@ -310,6 +310,37 @@ test("a rejected image decode does not leave the preparation queue blocked", asy
   assert.equal(image.listenerCount, 0);
 });
 
+test("changing the responsive source during decoding waits for the replacement decode", async () => {
+  const controller = new AbortController();
+  const image = new ControlledImage("rotated-phone");
+  let finished = false;
+  const ready = preparePageAssets({
+    images: [image],
+    fontReady: Promise.resolve(),
+    concurrency: 1,
+    signal: controller.signal,
+  }).then(() => {
+    finished = true;
+  });
+  image.loaded();
+  const firstDecode = image.decodeWait;
+  image.currentSrc = "/_next/image?url=rotated-phone&w=1080&q=75";
+  image.decodeWait = deferred();
+  image.loaded();
+  firstDecode.reject(new Error("responsive source changed"));
+  await flush();
+  assert.equal(image.decodeCalls, 2);
+  assert.equal(
+    finished,
+    false,
+    "the replacement load event alone must not reveal the page",
+  );
+  image.decodeWait.resolve();
+  await ready;
+  assert.equal(finished, true);
+  assert.equal(image.listenerCount, 0);
+});
+
 test("aborting settles pending fonts and image decoding, removes handlers, and stops queued promotion", async () => {
   const controller = new AbortController();
   const signalListeners = observeSignal(controller.signal);

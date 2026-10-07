@@ -8,7 +8,7 @@ Preserve the original onyx 3D loading animation and its docking into the header 
 
 Keep the original Fraunces/DM Sans fonts and adaptive menu color transition. Fast loads must still play the complete original 3D intro and smooth docking. The loader has no skip button. Display the address only in the visit details, and retain the user-confirmed 5.0 Google average review section in the new composition. The user prefers concise meaningful updates rather than scheduled progress messages.
 
-Wait until substantial redesign work is ready before creating or linking a new Vercel project. Use a separate project connected to `pebble2` at that stage.
+GitHub's existing integration connects this repository to the separate Vercel project `pebble2` in `ahad-fcea`. Branch pushes create previews automatically. Reuse that project for this experiment and keep the original Pebble project separate. The overhaul is being reviewed in draft PR #1; production release remains a later step.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

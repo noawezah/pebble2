@@ -161,6 +161,7 @@ export default function CafeSite({
                 href="/"
                 hrefLang="en"
                 lang="en"
+                aria-label="English"
                 aria-current={lang === "en" ? "page" : undefined}
               >
                 EN
@@ -169,6 +170,7 @@ export default function CafeSite({
                 href="/ro"
                 hrefLang="ro"
                 lang="ro"
+                aria-label="Română"
                 aria-current={lang === "ro" ? "page" : undefined}
               >
                 RO

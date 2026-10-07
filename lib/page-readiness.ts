@@ -23,13 +23,21 @@ function prepareImage(image: HTMLImageElement, signal: AbortSignal) {
       if (settled || decoding) return;
       if (signal.aborted || !image.naturalWidth) return finish();
       decoding = true;
+      const source = image.currentSrc || image.getAttribute("src");
       try {
         await image.decode?.();
       } catch {
         // A failed photo or srcset change must not trap the visitor behind a loader.
       }
       decoding = false;
-      if (signal.aborted || image.complete) finish();
+      if (settled || signal.aborted) return finish();
+      if (image.complete) {
+        // Rotation can finish a new srcset load while the previous decode is pending.
+        // Decode the replacement too, even when its load event has already fired.
+        if ((image.currentSrc || image.getAttribute("src")) !== source) {
+          void loaded();
+        } else finish();
+      }
     };
     image.addEventListener("load", loaded);
     image.addEventListener("error", finish);
