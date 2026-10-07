@@ -46,8 +46,8 @@ export const defaultContent: CafeContent = {
     ro: "Din Cluj-Napoca în colțul tău preferat din București. Servim cafea de specialitate MERON, prăjită în Transilvania pentru a pune în valoare caracterul fiecărei origini. Pregătită cu grijă la barul nostru, pentru o zi mai frumoasă.",
   },
   retailText: {
-    en: "Local beers from Zăganu and Grivița. PEBBLE mugs for your morning ritual. A few snacks for the way home. There’s a little more to discover at the counter.",
-    ro: "Bere locală de la Zăganu și Grivița. Căni PEBBLE pentru ritualul de dimineață. Câteva gustări pentru drumul spre casă. Mai ai ceva de descoperit la bar.",
+    en: "Zăganu blonde, Grivița and Miedăria beers, plus Sipit drinks. PEBBLE mugs for your morning ritual. A few snacks for the way home. There’s a little more to discover at the counter.",
+    ro: "Bere Zăganu blondă, Grivița și Miedăria, plus băuturi Sipit. Căni PEBBLE pentru ritualul de dimineață. Câteva gustări pentru drumul spre casă. Mai ai ceva de descoperit la bar.",
   },
   address: "Str. D. I. Mendeleev 10",
   postalCode: "030167",
