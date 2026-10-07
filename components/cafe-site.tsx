@@ -210,9 +210,6 @@ export default function CafeSite({
               </h1>
               <p className="pebble-hero-description">{c.heroText[lang]}</p>
               <div className="pebble-actions">
-                <MotionLink href={c.maps} external>
-                  {t.directions}
-                </MotionLink>
                 <a className="pebble-text-link" href="#our-place">
                   {t.explore}
                   <i className="ri-arrow-down-line" aria-hidden="true" />
@@ -322,12 +319,6 @@ export default function CafeSite({
                   className="pebble-cup-photo"
                   sizes="(max-width: 700px) 92vw, 46vw"
                 />
-                <span
-                  className="pebble-coffee-sticker pebble-float"
-                  aria-hidden="true"
-                >
-                  {lang === "en" ? "Made with care." : "Cu grijă."}
-                </span>
               </div>
             </div>
             <div className="pebble-coffee-details">
@@ -500,7 +491,14 @@ export default function CafeSite({
             href="#top"
             aria-label={`PEBBLE — ${t.up}`}
           >
-            PEBBLE<span aria-hidden="true">↗</span>
+            PEBBLE
+            <Image
+              className="pebble-footer-snail"
+              src="/images/snail.svg"
+              alt=""
+              width={250}
+              height={312}
+            />
           </a>
           <div className="pebble-footer-bottom">
             <span>
@@ -511,6 +509,10 @@ export default function CafeSite({
               <i className="ri-arrow-up-line" aria-hidden="true" />
             </a>
           </div>
+          <p className="pebble-site-credit">
+            {lang === "en" ? "Website made by" : "Website realizat de"} Zaidi{" "}
+            &quot;noawezah&quot; Ahad
+          </p>
         </footer>
       </div>
     </>

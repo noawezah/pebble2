@@ -8,6 +8,8 @@ Preserve the original onyx 3D loading animation and its docking into the header 
 
 Keep the original Fraunces/DM Sans fonts and adaptive menu color transition. Fast loads must still play the complete original 3D intro and smooth docking. The loader has no skip button. Display the address only in the visit details, and retain the user-confirmed 5.0 Google average review section in the new composition. The user prefers concise meaningful updates rather than scheduled progress messages.
 
+Latest composition corrections: slim header (72px desktop, 64px mobile); hero has no Get directions button; coffee photograph has no Made with care oval; section sculpture parts retain small visible gaps. Keep the full loading assembly separate from this section-sculpture behavior. Footer keeps the huge original PEBBLE type, replaces its oblique arrow with the original snail SVG at its native aspect ratio, and adds a discreet credit to Zaidi "noawezah" Ahad.
+
 GitHub's existing integration connects this repository to the separate Vercel project `pebble2` in `ahad-fcea`. Branch pushes create previews automatically. Reuse that project for this experiment and keep the original Pebble project separate. The overhaul is being reviewed in draft PR #1; production release remains a later step.
 
 <!-- BEGIN:nextjs-agent-rules -->

@@ -137,10 +137,12 @@ export default function SnailSculpture({
           (mobile.matches ? Math.PI / 9 : 0) +
           (reduced.matches ? -0.035 : progress * 0.09);
         sculpture.position.y = reduced.matches ? 0 : progress * 30;
-        // Each logo part meets its exact home coordinates at viewport centre.
+        // Keep a small gap at viewport centre; scrolling opens the pieces further.
+        const minimumSeparation = 0.28;
         const separation = reduced.matches
           ? 0
-          : Math.pow(Math.abs(progress), 1.35);
+          : minimumSeparation +
+            (1 - minimumSeparation) * Math.pow(Math.abs(progress), 1.35);
         const travel = {
           body: [12, 18, 7],
           shell: [-20, 5, 12],

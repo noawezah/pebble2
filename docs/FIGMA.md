@@ -36,3 +36,7 @@ Mobile wrapper `22:88` and intro wrapper `22:89` were created but remain empty; 
 - Photo components: interior `23:2`, coffee `23:3`, exterior `23:4`, bar `23:5`.
 
 The Figma header brand is currently lowercase; change the main-component text to uppercase PEBBLE when ordinary editing is available.
+
+## Latest website corrections to sync
+
+The user's 7 October screenshot corrections are implemented in the website. Sync them to the native boards when connected editing is available: 72px desktop/64px mobile header; remove the hero directions CTA; preserve slight gaps between the section sculpture's three parts; remove the coffee photograph's Made with care oval; replace the footer's oblique arrow with the original snail at its 250:312 ratio; retain the huge PEBBLE type and add a small, quiet credit to Zaidi "noawezah" Ahad. The intro snail still completes its original assembly and docking.
