@@ -18,7 +18,7 @@ An English-first, Romanian-second specialty café site for PEBBLE, Bucharest. Ne
 - `/design-system` — interactive visual system, in both languages
 - `/studio` — Sanity Studio (requires a project)
 
-Run `npm ci`, then `npm run dev`, from the `pebble2` folder. Use the exact URL printed by Next.js; port 3000 may be occupied. `npm run build` creates the Vercel-compatible production build. `npm run typecheck` checks TypeScript, and `npm run lint` checks source quality. The stack remains Next.js, React 19.2.8, and TypeScript; Next.js and its lint configuration are patched to 16.3.8.
+Run `npm ci`, then `npm run dev`, from the `pebble2` folder. The development server uses port 3002, matching [the localhost preview](http://localhost:3002/). Keep the server running while reviewing local changes. `npm run build` creates the Vercel-compatible production build. `npm run typecheck` checks TypeScript, and `npm run lint` checks source quality. The stack remains Next.js, React 19.2.8, and TypeScript; Next.js and its lint configuration are patched to 16.3.8.
 
 ## Brand and content
 
@@ -26,7 +26,7 @@ Interface: off-white, charcoal and neutral greys only. Green appears in photogra
 
 The reusable CSS tokens are in `app/globals.css`; the café composition is in `app/cafe.css`. Details and usage rules are in `DESIGN_SYSTEM.md`.
 
-Confirmed local content is in `lib/content.ts`: Str. D. I. Mendeleev 10, 030167 București; weekdays 08:00–17:00; weekends 10:00–19:00. Menu/prices are intentionally absent until supplied. There are no fabricated reviews, ratings, awards, phone numbers or product prices.
+Confirmed local content is in `lib/content.ts`: Str. D. I. Mendeleev 10, 030167 București; weekdays 09:00–18:00; weekends 10:00–19:00. Menu/prices are intentionally absent until supplied. There are no fabricated reviews, ratings, awards, phone numbers or product prices.
 
 ## Sanity connection
 

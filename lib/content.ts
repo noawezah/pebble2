@@ -51,7 +51,7 @@ export const defaultContent: CafeContent = {
   },
   address: "Str. D. I. Mendeleev 10",
   postalCode: "030167",
-  weekdayHours: "08:00–17:00",
+  weekdayHours: "09:00–18:00",
   weekendHours: "10:00–19:00",
   instagram: "https://www.instagram.com/pebble.bucharest/",
   facebook: "https://www.facebook.com/profile.php?id=61569199823551",
