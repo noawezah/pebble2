@@ -661,6 +661,18 @@
   letter-spacing: 0.025em;
   opacity: 0.5;
 }
+.pebble-site-credit a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+.pebble-credit-logo {
+  display: block;
+  width: auto;
+  height: 0.8em;
+  flex: 0 0 auto;
+}
 .pebble-footer-bottom {
   display: flex;
   justify-content: space-between;

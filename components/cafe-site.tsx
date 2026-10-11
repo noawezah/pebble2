@@ -510,8 +510,17 @@ export default function CafeSite({
             </a>
           </div>
           <p className="pebble-site-credit">
-            {lang === "en" ? "Website made by" : "Website realizat de"} Zaidi{" "}
-            &quot;noawezah&quot; Ahad
+            <a href="https://noawezah.ro">
+              <span>{lang === "en" ? "Made by" : "Realizat de"}</span>
+              <Image
+                className="pebble-credit-logo"
+                src="/images/noawezah-for-dark-backgrounds.svg"
+                alt="noawezah."
+                width={5079}
+                height={765}
+                unoptimized
+              />
+            </a>
           </p>
         </footer>
       </div>

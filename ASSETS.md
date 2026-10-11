@@ -85,3 +85,7 @@ Final seahorse: the owner's supplied seahorse pattern is composited into the act
 `snail-wall-authentic.png` / `.webp`: user-supplied photograph, used directly without AI alteration. Lossless WebP conversion only. Replaces the rejected generated wall correction; natural 568 × 558 aspect ratio retained.
 
 - snail-wall-reference-edit.png / .webp: current wall image. AI edit preserving the original oblique landscape angle, using snail-wall-authentic.png as the real-wall reference for the black central brick panel, grey outer brick, greenery and warm lighting along both sides. Supersedes the frontal photograph on the page; all originals retained.
+
+## Creator footer logo
+
+The user supplied `Portfolio/noawezah-logo-kit/svg/noawezah-for-dark-backgrounds.svg`. Its website copy in `public/images/noawezah-for-dark-backgrounds.svg` retains all original paths, colors, and transforms. Only the SVG canvas is trimmed to remove blank margins for the small linked footer credit; the source logo is unchanged.
