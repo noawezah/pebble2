@@ -33,7 +33,7 @@ const labels = {
     wallAlt:
       "PEBBLE’s moss wall with white ceramic snails and warm side lighting",
     coffeeAlt:
-      "A PEBBLE ceramic cup with seahorse latte art on the ivory counter",
+      "A PEBBLE ceramic cup with Pegasus latte art on the ivory counter",
     barAlt: "PEBBLE’s white brick counter and illuminated MERON coffee shelves",
     machineAlt: "The La Marzocco espresso machine and grinders at PEBBLE’s bar",
     bunnyAlt:
@@ -70,7 +70,7 @@ const labels = {
     wallAlt:
       "Peretele de mușchi PEBBLE, cu melci albi din ceramică și lumină caldă",
     coffeeAlt:
-      "Un căluț de mare desenat în spuma cafelei, într-o ceașcă PEBBLE",
+      "Un pegas desenat în spuma cafelei, într-o ceașcă PEBBLE",
     barAlt: "Barul PEBBLE cu cărămidă albă și rafturi iluminate cu cafea MERON",
     machineAlt: "Espressorul La Marzocco și râșnițele de la barul PEBBLE",
     bunnyAlt:
@@ -314,7 +314,7 @@ export default function CafeSite({
               </div>
               <div className="pebble-coffee-visual pebble-reveal">
                 <Photo
-                  src="/images/seahorse-real-editorial.webp"
+                  src="/images/pegasus-real-editorial.webp"
                   alt={t.coffeeAlt}
                   className="pebble-cup-photo"
                   sizes="(max-width: 700px) 92vw, 46vw"

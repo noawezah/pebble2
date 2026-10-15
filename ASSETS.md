@@ -5,7 +5,7 @@ All generated images used the built-in ImageGen tool, not the API/CLI fallback. 
 | Website image | Master | Usage |
 |---|---|---|
 | Empty interior | interior-empty.png | Hero on website and design system |
-| Natural seahorse flat white | flat-white-seahorse-natural.png | Coffee section |
+| Pegasus latte art composite | pegasus-real-editorial.png | Coffee section (current) |
 | La Marzocco and bar | marzocco-bar.png | Coffee editorial image |
 | Moss wall with snails | snail-wall.png | Our place section |
 | Enhanced storefront | front-enhanced.png | Visit section |
@@ -89,3 +89,7 @@ Final seahorse: the owner's supplied seahorse pattern is composited into the act
 ## Creator footer logo
 
 The user supplied `Portfolio/noawezah-logo-kit/svg/noawezah-for-dark-backgrounds.svg`. Its website copy in `public/images/noawezah-for-dark-backgrounds.svg` retains all original paths, colors, and transforms. Only the SVG canvas is trimmed to remove blank margins for the small linked footer credit; the source logo is unchanged.
+
+## Pegasus coffee composite
+
+The owner requested replacing only the existing seahorse foam with the Pegasus milk pattern from `IMG_20260919_174038138_HDR.jpg` (the bottom-left drink), retaining the original golden coffee and creamy foam colors instead of the reference hot chocolate. `pegasus-real-editorial.png` and its lossless `.webp` preserve the original 1536 x 1024 framing. This is a direct photographic alpha composite, not AI generation: the supplied foam is isolated, adapted to the cup perspective, and matched to the original drink tones. The previous foam is repaired using crema samples from the existing photo. The ceramic cup, rim, logo, saucer, lighting, counter and background remain unchanged. Pixel comparison confirms zero changed pixels outside the drink-surface edit mask, and the lossless WebP matches the PNG. Earlier seahorse variants remain archived. This composite is styled imagery, not documentary evidence of a drink served.
