@@ -71,5 +71,13 @@
     "editTarget": "public/images/snail-wall-editorial.png",
     "reference": "public/images/snail-wall-authentic.png",
     "description": "AI reconstruction preserving the original oblique landscape framing, corrected using the actual wall photograph: black projecting central brickwork against grey outer brick, warm concealed light along both vertical sides, irregular top/right moss and narrow trailing foliage. Supersedes the direct frontal photograph on the website; reference and prior variants retained."
+  },
+  {
+    "name": "pegasus-real",
+    "source": "public/images/pegasus-real-editorial.png",
+    "editTarget": "public/images/seahorse-real-editorial.webp",
+    "reference": "Owner-supplied IMG_20260919_174038138_HDR.jpg, EXIF orientation corrected",
+    "method": "Direct photographic compositing; no AI generation",
+    "description": "Transfer only the Pegasus milk pattern from the bottom-left reference drink. Match the existing golden coffee and creamy foam colors, excluding the hot-chocolate color, cup, tray, gorilla and all surroundings. Preserve the existing PEBBLE cup, rim, logo, saucer, background, lighting and 1536 x 1024 framing. Previous foam repaired using original crema texture samples. PNG and lossless WebP are pixel-identical; zero pixels outside the coffee-surface mask changed. Original seahorse assets retained."
   }
 ]
