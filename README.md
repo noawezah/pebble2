@@ -9,7 +9,7 @@ The independent redesign and Figma workflow experiment for PEBBLE. This reposito
 
 The copied site remains available in Git history as the comparison baseline. The selected redesign uses cream and charcoal, the original fonts, adaptive menu colors, spotlight/vine dividers, and the original 3D loading choreography. Photography, headings, and decorative objects receive a coordinated motion pass. The original `pebble` repository and deployment remain separate. GitHub's existing integration now tracks the redesign branch for Production in the separate `pebble2` Vercel project.
 
-An English-first, Romanian-second specialty café site for PEBBLE, Bucharest. Next.js App Router, React, TypeScript, Tailwind CSS, self-hosted Fraunces and DM Sans, Remix Icon, GSAP, and Sanity.
+An English-first, Romanian-second specialty café site for PEBBLE, Bucharest. Next.js App Router, React, TypeScript, Tailwind CSS, self-hosted Hurme Geometric Sans 1 and Fraunces (DM Sans for missing glyphs), Remix Icon, GSAP, and Sanity.
 
 ## Preview
 
@@ -22,7 +22,7 @@ Run `npm ci`, then `npm run dev`, from the `pebble2` folder. The development ser
 
 ## Brand and content
 
-Interface: off-white, charcoal and neutral greys only. Green appears in photographs and the preserved original spotlight/vine artwork. PEBBLE is always uppercase. The snail SVG is traced from the supplied original logo, not a newly invented symbol. Fraunces Black with SOFT 100 is the web-font alternative to Cooper Black; no commercial Cooper font is redistributed.
+Interface: off-white, charcoal and neutral greys only. Green appears in photographs and the preserved original spotlight/vine artwork. PEBBLE is always uppercase. The snail and PEBBLE wordmark are exported directly from the client's original vector logo; no raster tracing is used for the current brand assets. Fraunces Black with SOFT 100 is the web-font alternative to Cooper Black; no commercial Cooper font is redistributed.
 
 The reusable CSS tokens are in `app/globals.css`; the café composition is in `app/cafe.css`. Details and usage rules are in `DESIGN_SYSTEM.md`.
 

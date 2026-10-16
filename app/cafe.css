@@ -102,18 +102,21 @@
   );
   border-bottom: 0;
 }
-.cafe-header .brand-lockup > span,
 .cafe-header .pebble-desktop-nav,
 .cafe-header .pebble-language,
 .cafe-header .pebble-mobile-menu summary {
   color: #fff;
   mix-blend-mode: difference;
 }
-.cafe-header .brand-lockup img {
+.cafe-header .brand-lockup {
   filter: brightness(0) invert(1);
   mix-blend-mode: difference;
 }
-.pebble-header .brand-lockup img {
+.cafe-header .brand-lockup img {
+  filter: none;
+  mix-blend-mode: normal;
+}
+.pebble-header .brand-snail {
   width: 25px;
   height: 32px;
 }
@@ -786,7 +789,7 @@
   .pebble-header .brand-lockup {
     gap: 8px;
   }
-  .pebble-header .brand-lockup img {
+  .pebble-header .brand-snail {
     width: 22px;
     height: 28px;
   }
@@ -1150,5 +1153,64 @@
   .pebble-hero-detail {
     bottom: 54px;
     width: 34%;
+  }
+}
+
+/* Original client lettering and Hurme body typography. */
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-snail {
+  display: block;
+  width: 25px;
+  height: 32px;
+  flex: 0 0 auto;
+}
+.brand-name {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+.brand-wordmark {
+  display: block;
+  width: 118px;
+  height: auto;
+}
+.pebble-footer-wordmark {
+  display: block;
+  width: min(84%, 1260px);
+  height: auto;
+  min-width: 0;
+  filter: brightness(0) invert(1);
+}
+.cafe {
+  letter-spacing: 0.005em;
+}
+.cafe .eyebrow {
+  font-weight: 600;
+  letter-spacing: 0.13em;
+}
+.pebble-desktop-nav a {
+  padding-inline: clamp(12px, 1.4vw, 20px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.pebble-language a,
+.pebble-text-link,
+.pebble-practical strong {
+  font-weight: 600;
+}
+.pebble-practical strong,
+.pebble-hours {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 700px) {
+  .pebble-header .brand-wordmark {
+    width: clamp(72px, calc(100vw - 244px), 106px);
+  }
+  .pebble-hero .pebble-kicker {
+    font-size: 11px;
   }
 }

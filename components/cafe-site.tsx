@@ -491,7 +491,14 @@ export default function CafeSite({
             href="#top"
             aria-label={`PEBBLE — ${t.up}`}
           >
-            PEBBLE
+            <Image
+              className="pebble-footer-wordmark"
+              src="/images/pebble-wordmark.svg"
+              alt=""
+              width={1080}
+              height={200}
+              unoptimized
+            />
             <Image
               className="pebble-footer-snail"
               src="/images/snail.svg"

@@ -29,7 +29,7 @@ Three directions were compared in editable Figma frames. The user selected kinet
 2. **Art-poster café.** Warm paper, inky plum, and a copper accent. Bold display typography, playful poster-like crops, layered photography, and rhythmic movement. Explore a clearly different palette and composition.
 3. **After-hours garden.** Deep ink, moss, and lamp amber. Atmospheric café photography, immersive transitions, and a tactile central object. Explore a darker and more spatial direction without sacrificing readability.
 
-The selected palette is cream `#F5F3EE` and charcoal `#292929`, with neutral rules and muted text. Keep rounded Fraunces with SOFT 100 and DM Sans. Green from café photography and the preserved original vine artwork remains part of the identity.
+The selected palette is cream `#F5F3EE` and charcoal `#292929`, with neutral rules and muted text. Keep rounded Fraunces with SOFT 100 for display headings. Use the client-supplied Hurme Geometric Sans 1 for body text and navigation, with DM Sans only as a missing-glyph fallback. Green from café photography and the preserved original vine artwork remains part of the identity.
 
 Selected desktop design: https://www.figma.com/design/dRLqgYzHIKn3L2FJ1xwFYA?node-id=22-85. Figma contains native editable layers, local components, and bound variables. Figma's built-in AI was not invoked. The Starter-plan connected-tool call limit interrupted mobile frame and motion-keyframe work; those remain unpopulated in Figma. Mobile composition and animation are implemented in the website itself. Detailed file state is recorded in `docs/FIGMA.md`.
 
@@ -111,3 +111,7 @@ The footer keeps the same large PEBBLE lettering. Its oblique arrow is replaced 
 The user-requested release is live at https://pebble2.vercel.app. Vercel deployment `5c3xUAyxoJQyYkPpXhfuD4d1vp8B` is Ready / Production, assigned to that domain, with source commit `e32a9b305612539a34932577e03d4e7b8479be53` and a deployment duration of 1m44s.
 
 Live production browser checks confirmed the cream/charcoal site, completed intro, all seven photographs and fonts ready, original footer snail and credit, correct Romanian document language, and coffee navigation. At 390×844, the mobile menu opens, Găsește-ne reaches `/ro#visit`, and the menu closes. Headers measure 72px on desktop and 64px on mobile; neither layout has horizontal overflow or browser errors. This verification concerns the live remote production URL and does not replace the historical restriction on local preview inspection recorded above.
+
+## Client brand originals - 16 October 2026
+
+The owner supplied the original outlined PEBBLE logo and Hurme Geometric Sans 1 font files. The live site now uses those exact vector wordmark/snail curves and locally optimized WOFF2 weights 400, 600 and 700. Display headings retain Fraunces because their rounded forms complement the original wordmark. Hurme lacks U+021A/U+021B; the existing DM Sans fallback supplies the correct Romanian comma-below characters. Navigation tracking, caps, numeric spacing and small-screen logo sizing are adjusted for the supplied typeface. The three-part onyx intro, section sculpture gaps, timing and smooth docking remain; their contours now match the original client vector artwork.

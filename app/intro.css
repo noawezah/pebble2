@@ -34,7 +34,7 @@
 .cafe-intro[data-phase="static"] .intro-static {
   display: grid;
 }
-.intro-static svg {
+.intro-static :is(svg, img) {
   width: min(58vw, 37vh, 250px);
   height: auto;
 }

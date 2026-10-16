@@ -1,0 +1,45 @@
+{
+  "source_logo": "Pebble_Logo.pdf",
+  "source_logo_sha256": "0fd1db55d22ac57f39469873b913dbf5b8070bc0a9ee77a4121ebe39db262d6c",
+  "method": "Exact original vector paths retained; only viewport, scale and website palette adapted. No AI or raster tracing.",
+  "fonts": [
+    {
+      "source": "HurmeGeometricSans1.otf",
+      "output": "hurme-geometric-sans-1-regular.woff2",
+      "weight": 400,
+      "original_bytes": 267768,
+      "woff2_bytes": 30372,
+      "missing_romanian_codepoints": [
+        "U+021A",
+        "U+021B"
+      ],
+      "source_sha256": "e143d40d0ef6c3800e97937fff6a2c6b1309e015004790fad69e736276019755"
+    },
+    {
+      "source": "HurmeGeometricSans1-SemiBold.otf",
+      "output": "hurme-geometric-sans-1-semibold.woff2",
+      "weight": 600,
+      "original_bytes": 290552,
+      "woff2_bytes": 37840,
+      "missing_romanian_codepoints": [
+        "U+021A",
+        "U+021B"
+      ],
+      "source_sha256": "c34aa2e27308cfa6046522d4aa7082a564f5cc7e08294fcb8fe7e58d4256006a"
+    },
+    {
+      "source": "HurmeGeometricSans1-Bold.otf",
+      "output": "hurme-geometric-sans-1-bold.woff2",
+      "weight": 700,
+      "original_bytes": 288872,
+      "woff2_bytes": 37044,
+      "missing_romanian_codepoints": [
+        "U+021A",
+        "U+021B"
+      ],
+      "source_sha256": "f4ad505cfe7024747c4a6a11dfeec750d793a35bb4efd35ab840e6ee9ed25748"
+    }
+  ],
+  "display_headings": "Fraunces retained to complement the original rounded wordmark.",
+  "fallback": "DM Sans Variable supplies U+021A/U+021B missing from the supplied Hurme files."
+}

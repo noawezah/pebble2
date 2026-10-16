@@ -17,14 +17,14 @@ Green belongs only in photographs. No green buttons, panels, typography, hover s
 
 ## Typography
 
-- Brand: PEBBLE, uppercase, normal tracking, Fraunces Black 900; original snail alongside the header wordmark.
+- Brand: PEBBLE, uppercase; exact client vector wordmark and original snail outlines, with their native proportions.
 - Display: Fraunces Variable, weight 900, SOFT 100, WONK 1, optical size 72. A soft web alternative to Cooper Black, not an exact font match.
-- Body/UI: DM Sans Variable, 400–500, 16–20px, comfortable line height.
+- Body/UI: client-provided Hurme Geometric Sans 1, weights 400/600/700, 16-20px and comfortable line height. DM Sans is retained only for missing glyphs such as Romanian U+021A/U+021B.
 - Labels: 12–14px, uppercase with modest tracking.
 - Main headings: fluid roughly 38–132px. The PEBBLE masthead intentionally exceeds the headline scale.
 - Romanian support: ă â î ș ț / Ă Â Î Ș Ț; use comma-below Ș and Ț.
 
-Fonts are self-hosted through Fontsource. The commercial Cooper font on the local machine is not copied or published.
+Hurme is converted from the supplied OTF files into locally hosted WOFF2 and loaded with next/font/local. Fraunces and the missing-glyph fallback remain self-hosted through Fontsource. The commercial Cooper font on the local machine is not copied or published.
 
 ## Layout
 
@@ -50,7 +50,7 @@ English first, Romanian second. Personal, calm, specific. MERON is identified as
 
 - Open text overlaps without background panels. Three interior photographs cascade through a seven-column composition.
 - Alternating diagonal GSAP scroll trajectories, inner image parallax, rotating display captions, magnetic buttons, diagonal hover fills and rolling text. Reduced-motion visitors receive static compositions.
-- The matte grey snail is real WebGL geometry extruded from the original traced brand contours, with rounded edges and nonmetallic lighting. It responds to scroll and pointer position, loads near the viewport, stops rendering offscreen and has the original SVG as fallback.
+- The matte grey snail is real WebGL geometry extruded from the original client vector contours, with rounded edges and nonmetallic lighting. It responds to scroll and pointer position, loads near the viewport, stops rendering offscreen and has the original SVG as fallback.
 - Google rating is a manually maintained 5.0 snapshot supplied by the owner and corroborated by café listings on September 15, 2026. No fabricated individual testimonials or live-review-count claim.
 - Map is a grayscale Google embed resolving the PEBBLE place at Mendeleev 10. EN remains primary, RO secondary.
 

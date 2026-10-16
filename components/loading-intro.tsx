@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { preparePageAssets } from "@/lib/page-readiness";
 
@@ -112,7 +113,7 @@ export default function LoadingIntro({ locale }: { locale: "en" | "ro" }) {
       site = document.querySelector<HTMLElement>(".cafe");
       if (!site) return finish("error");
       mark = site.querySelector<HTMLImageElement>(
-        ".cafe-header .brand-lockup img",
+        ".cafe-header .brand-snail",
       );
       previousInert = site.inert;
       previousOpacity = mark?.style.opacity ?? "";
@@ -491,11 +492,14 @@ export default function LoadingIntro({ locale }: { locale: "en" | "ro" }) {
       <div className="intro-backdrop" />
       <div className="intro-stage" aria-hidden="true" />
       <div className="intro-static" aria-hidden="true">
-        <svg viewBox="0 0 250 312" fill="currentColor">
-          <path d="M108 41 C103 33 99 18 106 11 C112 5 123 10 118 19 C115 26 108 20 108 24 C108 29 111 34 115 37 C119 36 122 35 127 35 C127 25 132 14 140 11 C150 7 153 20 146 24 C141 28 137 22 137 23 C134 27 133 31 133 35 C153 37 172 55 171 72 C171 84 159 88 159 95 C159 111 194 132 204 151 C218 177 198 193 177 198 C138 204 91 218 38 239 C38 221 47 210 60 204 C81 201 93 191 97 178 C116 181 141 167 144 151 C150 127 123 105 108 92 C88 77 89 54 108 41 Z" />
-          <path d="M100 170 C126 174 140 155 132 136 C120 110 93 93 66 93 C36 92 12 117 11 146 C9 171 26 192 49 196 C72 201 89 186 90 165 C90 146 79 134 65 135 C52 135 46 145 47 156 C47 165 53 171 61 169 C66 168 69 163 69 158 C74 166 67 174 57 174 C44 174 39 162 40 150 C40 135 51 125 65 126 C87 124 103 145 100 170 Z" />
-          <path d="M22 265 C33 244 85 220 145 210 C191 198 222 221 235 251 C243 273 237 283 218 291 C178 308 90 307 54 300 C25 295 14 282 22 265 Z" />
-        </svg>
+        <Image
+          src="/images/snail.svg"
+          alt=""
+          width={250}
+          height={312}
+          loading="eager"
+          unoptimized
+        />
       </div>
       <div className="intro-live" role="status" aria-live="polite">
         {ro
