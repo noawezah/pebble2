@@ -9,12 +9,13 @@ The independent redesign and Figma workflow experiment for PEBBLE. This reposito
 
 The copied site remains available in Git history as the comparison baseline. The selected redesign uses cream and charcoal, the original fonts, adaptive menu colors, spotlight/vine dividers, and the original 3D loading choreography. Photography, headings, and decorative objects receive a coordinated motion pass. The original `pebble` repository and deployment remain separate. GitHub's existing integration now tracks the redesign branch for Production in the separate `pebble2` Vercel project.
 
-An English-first, Romanian-second specialty café site for PEBBLE, Bucharest. Next.js App Router, React, TypeScript, Tailwind CSS, self-hosted Hurme Geometric Sans 1 and Fraunces (DM Sans for missing glyphs), Remix Icon, GSAP, and Sanity.
+A Romanian-first specialty café site for PEBBLE, Bucharest, with an English version. Next.js App Router, React, TypeScript, Tailwind CSS, self-hosted Hurme Geometric Sans 1 and Fraunces (DM Sans for missing glyphs), Remix Icon, GSAP, and Sanity.
 
 ## Preview
 
-- `/` — English café page
-- `/ro` — Romanian café page
+- `/` — Romanian café page (`/ro` redirects here)
+- `/en` — English café page
+- `/meniu` and `/en/menu` — customer menu
 - `/design-system` — interactive visual system, in both languages
 - `/studio` — Sanity Studio (requires a project)
 
@@ -22,11 +23,11 @@ Run `npm ci`, then `npm run dev`, from the `pebble2` folder. The development ser
 
 ## Brand and content
 
-Interface: off-white, charcoal and neutral greys only. Green appears in photographs and the preserved original spotlight/vine artwork. PEBBLE is always uppercase. The snail and PEBBLE wordmark are exported directly from the client's original vector logo; no raster tracing is used for the current brand assets. Fraunces Black with SOFT 100 is the web-font alternative to Cooper Black; no commercial Cooper font is redistributed.
+Interface: off-white, charcoal and neutral greys, with muted tints for the shop placeholders. Green also appears in photography and the preserved original spotlight/vine artwork. PEBBLE is always uppercase. The snail and PEBBLE wordmark are exported directly from the client's original vector logo; no raster tracing is used for the current brand assets. Fraunces Black with SOFT 100 is the web-font alternative to Cooper Black; no commercial Cooper font is redistributed.
 
 The reusable CSS tokens are in `app/globals.css`; the café composition is in `app/cafe.css`. Details and usage rules are in `DESIGN_SYSTEM.md`.
 
-Confirmed local content is in `lib/content.ts`: Str. D. I. Mendeleev 10, 030167 București; weekdays 09:00–18:00; weekends 10:00–19:00. Menu/prices are intentionally absent until supplied. There are no fabricated reviews, ratings, awards, phone numbers or product prices.
+Confirmed local content is in `lib/content.ts`: Str. D. I. Mendeleev 10, 030167 București; weekdays 09:00–18:00; weekends 10:00–19:00. The customer menu uses the owner's reference boards, transcribed in `lib/menu.ts`. Food items, nutrition values and the oat milk surcharge are pending. The shop's four colored product panels and sample contact details are in `components/cafe-shop.tsx`; replace them with confirmed photos and contacts when supplied.
 
 ## Sanity connection
 
@@ -36,7 +37,7 @@ The website works immediately using the confirmed local content. To activate CMS
 2. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET`. These are project identifiers, not secret tokens.
 3. Add the local and production Studio origins to Sanity's CORS settings with authenticated requests enabled.
 4. Restart the dev server, visit `/studio`, and sign in with the project owner's Sanity account.
-5. Open **Café content**. Fill both language fields and publish. The site reads published content and revalidates every 60 seconds. An empty menu is hidden. Invalid or missing fields use the local fallback.
+5. Open **Café content**. Fill both language fields and publish. The homepage reads published content and revalidates every 60 seconds. Invalid or missing fields use the local fallback. The public menu is maintained separately in `lib/menu.ts`.
 
 The schema is in `sanity/schema.ts`. Studio authenticates through Sanity; no write token is embedded in the site. Sanity service connection cannot be verified until a real project is supplied. Initial copy remains local until entered and published in Studio.
 

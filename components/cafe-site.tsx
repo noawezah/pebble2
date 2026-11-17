@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CafeContent, Locale } from "@/lib/content";
-import Brand from "@/components/brand";
+import { cafeRoutes } from "@/lib/cafe-routes";
+import CafeHeader from "@/components/cafe-header";
 import CafeMotion from "@/components/cafe-motion";
+import CafeShop from "@/components/cafe-shop";
 import LoadingIntro from "@/components/loading-intro";
 import SnailSculpture from "@/components/snail-sculpture";
 import { SpotlightRail } from "@/components/spotlight-vine-rail";
@@ -27,8 +29,7 @@ const labels = {
     social: "A little more PEBBLE",
     up: "Back to top",
     skip: "Skip to content",
-    menu: "On the menu",
-    currency: "lei",
+    viewMenu: "Explore the menu",
     interiorAlt: "Sunlit tables, leafy plants and charcoal brick inside PEBBLE",
     wallAlt:
       "PEBBLE’s moss wall with white ceramic snails and warm side lighting",
@@ -41,7 +42,6 @@ const labels = {
     frontAlt: "PEBBLE’s glass entrance with its original snail logo",
     city: "Bucharest",
     services: "Dog friendly · Plant-based options",
-    menuButton: "Navigation menu",
     photoNote: "A little hidden. A little lovely.",
     snailNote: "At your own pace.",
   },
@@ -63,8 +63,7 @@ const labels = {
     social: "Mai mult PEBBLE",
     up: "Înapoi sus",
     skip: "Sari la conținut",
-    menu: "În meniu",
-    currency: "lei",
+    viewMenu: "Vezi meniul",
     interiorAlt:
       "Mese la lumină, plante și cărămidă închisă în interiorul PEBBLE",
     wallAlt:
@@ -78,7 +77,6 @@ const labels = {
     frontAlt: "Intrarea din sticlă PEBBLE cu marca originală a melcului",
     city: "București",
     services: "Căței bineveniți · Opțiuni vegetale",
-    menuButton: "Meniu de navigare",
     photoNote: "Puțin ascuns. Ușor de iubit.",
     snailNote: "În ritmul tău.",
   },
@@ -117,13 +115,12 @@ function Lines({ text }: { text: string }) {
 
 export default function CafeSite({
   content: c,
-  locale: lang = "en",
+  locale: lang = "ro",
 }: {
   content: CafeContent;
   locale?: Locale;
 }) {
   const t = labels[lang];
-  const navigation = ["our-place", "coffee", "visit"];
   return (
     <>
       <LoadingIntro locale={lang} />
@@ -132,70 +129,8 @@ export default function CafeSite({
         <a className="skip-link" href="#main">
           {t.skip}
         </a>
-        <header className="cafe-header pebble-header pebble-pad">
-          <Link
-            href={lang === "en" ? "/" : "/ro"}
-            className="small-brand"
-            aria-label="PEBBLE home"
-          >
-            <Brand />
-          </Link>
-          <nav
-            className="pebble-desktop-nav"
-            aria-label={
-              lang === "en" ? "Main navigation" : "Navigare principală"
-            }
-          >
-            {navigation.map((id, i) => (
-              <a href={`#${id}`} key={id}>
-                {t.nav[i]}
-              </a>
-            ))}
-          </nav>
-          <div className="pebble-header-tools">
-            <div
-              className="pebble-language"
-              aria-label={lang === "en" ? "Language" : "Limbă"}
-            >
-              <Link
-                href="/"
-                hrefLang="en"
-                lang="en"
-                aria-label="English"
-                aria-current={lang === "en" ? "page" : undefined}
-              >
-                EN
-              </Link>
-              <Link
-                href="/ro"
-                hrefLang="ro"
-                lang="ro"
-                aria-label="Română"
-                aria-current={lang === "ro" ? "page" : undefined}
-              >
-                RO
-              </Link>
-            </div>
-            <details className="pebble-mobile-menu">
-              <summary aria-label={t.menuButton}>
-                <span />
-                <span />
-              </summary>
-              <nav aria-label={t.menuButton}>
-                {navigation.map((id, i) => (
-                  <a href={`#${id}`} key={id}>
-                    {t.nav[i]}
-                    <i
-                      className="ri-arrow-right-down-line"
-                      aria-hidden="true"
-                    />
-                  </a>
-                ))}
-              </nav>
-            </details>
-          </div>
-        </header>
-        <main id="main">
+        <CafeHeader locale={lang} />
+        <main id="main" tabIndex={-1}>
           <section
             className="pebble-hero pebble-pad"
             aria-labelledby="cafe-title"
@@ -252,7 +187,6 @@ export default function CafeSite({
             </div>
           </div>
           <section
-            id="our-place"
             className="pebble-story pebble-pad pebble-section"
             aria-labelledby="place-title"
           >
@@ -265,7 +199,7 @@ export default function CafeSite({
                 sizes="(max-width: 700px) 92vw, 46vw"
               />
             </div>
-            <div className="pebble-story-copy">
+            <div id="our-place" className="pebble-story-copy" tabIndex={-1}>
               <p className="eyebrow pebble-section-label">{t.nav[0]}</p>
               <h2 id="place-title" className="pebble-reveal">
                 <Lines text={c.storyTitle[lang]} />
@@ -292,25 +226,24 @@ export default function CafeSite({
             </div>
           </section>
           <section
-            id="coffee"
             className="pebble-coffee pebble-pad pebble-section"
             aria-labelledby="coffee-title"
           >
             <SpotlightRail variant={1} tone="dark" />
             <div className="pebble-coffee-main">
-              <div className="pebble-coffee-copy">
+              <div id="coffee" className="pebble-coffee-copy" tabIndex={-1}>
                 <p className="eyebrow pebble-section-label">{t.coffeeLabel}</p>
                 <h2 id="coffee-title" className="pebble-reveal">
                   <Lines text={t.coffee} />
                 </h2>
                 <p>{c.coffeeText[lang]}</p>
-                <a
+                <Link
                   className="pebble-text-link"
-                  href={c.menu.length ? "#menu" : "#visit"}
+                  href={cafeRoutes.menu[lang]}
                 >
-                  {c.menu.length ? t.menu : t.explore}
-                  <i className="ri-arrow-right-down-line" aria-hidden="true" />
-                </a>
+                  {t.viewMenu}
+                  <i className="ri-arrow-right-line" aria-hidden="true" />
+                </Link>
               </div>
               <div className="pebble-coffee-visual pebble-reveal">
                 <Photo
@@ -352,36 +285,7 @@ export default function CafeSite({
               </div>
             </div>
           </section>
-          {c.menu.length > 0 && (
-            <section
-              id="menu"
-              className="pebble-menu pebble-pad pebble-section"
-              aria-labelledby="menu-title"
-            >
-              <SpotlightRail variant={2} />
-              <p className="eyebrow">{t.coffeeLabel}</p>
-              <h2 id="menu-title">{t.menu}</h2>
-              <dl>
-                {c.menu.map((item) => (
-                  <div key={item._key}>
-                    <dt>
-                      {item.name[lang]}
-                      {item.description?.[lang] && (
-                        <p>{item.description[lang]}</p>
-                      )}
-                    </dt>
-                    <dd>
-                      {new Intl.NumberFormat(
-                        lang === "en" ? "en-GB" : "ro-RO",
-                        { maximumFractionDigits: 2 },
-                      ).format(item.price)}{" "}
-                      {t.currency}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-          )}
+          <CafeShop locale={lang} />
           <section
             className="pebble-reviews pebble-pad pebble-section"
             aria-labelledby="reviews-title"
@@ -433,7 +337,6 @@ export default function CafeSite({
             </div>
           </section>
           <section
-            id="visit"
             className="pebble-visit pebble-pad pebble-section"
             aria-labelledby="visit-title"
           >
@@ -444,7 +347,7 @@ export default function CafeSite({
               className="pebble-front-photo pebble-reveal"
               sizes="(max-width: 700px) 92vw, 40vw"
             />
-            <div className="pebble-visit-copy">
+            <div id="visit" className="pebble-visit-copy" tabIndex={-1}>
               <p className="eyebrow pebble-section-label">{t.nav[2]}</p>
               <h2 id="visit-title" className="pebble-reveal">
                 <Lines text={t.visit} />

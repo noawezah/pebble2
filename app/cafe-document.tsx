@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import type { Locale } from "@/lib/content";
 import { siteOrigin } from "@/lib/site-origin";
 import "@fontsource-variable/fraunces/full.css";
 import "@fontsource-variable/dm-sans";
@@ -32,18 +33,32 @@ const hurme = localFont({
   adjustFontFallback: false,
 });
 
-export const metadata: Metadata = {
+const sharedMetadata: Metadata = {
   ...(siteOrigin() ? { metadataBase: new URL(siteOrigin()!) } : {}),
-  title: "PEBBLE — Specialty coffee, Bucharest",
-  description:
-    "A little hidden. Easy to love. MERON specialty coffee, plants and a welcoming atmosphere at PEBBLE, Mendeleev 10, Bucharest.",
   icons: { icon: "/images/snail.svg" },
 };
-export default function RootLayout({
+
+export const cafeMetadata: Record<Locale, Metadata> = {
+  ro: {
+    ...sharedMetadata,
+    title: "PEBBLE — Cafea de specialitate, București",
+    description:
+      "Puțin ascuns. Ușor de iubit. Cafea MERON, plante și o atmosferă primitoare la PEBBLE, Mendeleev 10, București.",
+  },
+  en: {
+    ...sharedMetadata,
+    title: "PEBBLE — Specialty coffee, Bucharest",
+    description:
+      "A little hidden. Easy to love. MERON specialty coffee, plants and a welcoming atmosphere at PEBBLE, Mendeleev 10, Bucharest.",
+  },
+};
+
+export default function CafeDocument({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  locale,
+}: Readonly<{ children: React.ReactNode; locale: Locale }>) {
   return (
-    <html lang="en" className={hurme.variable}>
+    <html lang={locale} className={hurme.variable}>
       <body>{children}</body>
     </html>
   );

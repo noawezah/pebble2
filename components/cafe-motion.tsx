@@ -28,7 +28,6 @@ export default function CafeMotion({
     const saved = [
       { element: header, property: "--header-dark-start" },
       { element: header, property: "--header-dark-end" },
-      { element: cafe, property: "--cafe-header-height" },
     ].map(({ element, property }) => ({
       element,
       property,
@@ -59,7 +58,6 @@ export default function CafeMotion({
       // A paper band follows the exact dark-section intersection inside the header.
       write(header, "--header-dark-start", `${bandStart}px`);
       write(header, "--header-dark-end", `${bandEnd}px`);
-      write(cafe, "--cafe-header-height", `${bounds.height}px`);
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -315,12 +313,11 @@ export default function CafeMotion({
       active: link.dataset.active,
       current: link.getAttribute("aria-current"),
     }));
-    const sections = [...ids]
-      .map((id) => document.getElementById(id))
-      .filter(
-        (section): section is HTMLElement =>
-          !!section && cafe.contains(section),
-      );
+    const sections = new Map<Element, string>();
+    ids.forEach((id) => {
+      const section = document.getElementById(id)?.closest("section");
+      if (section && cafe.contains(section)) sections.set(section, id);
+    });
     const visible = new Set<Element>();
     const navigationObserver = new IntersectionObserver(
       (entries) => {
@@ -328,7 +325,7 @@ export default function CafeMotion({
           if (entry.isIntersecting) visible.add(entry.target);
           else visible.delete(entry.target);
         });
-        const active = sections.find((section) => visible.has(section))?.id;
+        const active = [...sections].find(([section]) => visible.has(section))?.[1];
         links.forEach((link) => {
           if (link.hash === `#${active}`) {
             link.dataset.active = "true";
@@ -341,44 +338,7 @@ export default function CafeMotion({
       },
       { rootMargin: "-15% 0px -65% 0px", threshold: 0 },
     );
-    sections.forEach((section) => navigationObserver.observe(section));
-
-    const menu = cafe.querySelector<HTMLDetailsElement>(".pebble-mobile-menu");
-    const summary = menu?.querySelector<HTMLElement>("summary");
-    let menuCloseFrame = 0;
-    const closeAfterNavigation = (event: MouseEvent) => {
-      const anchor =
-        event.target instanceof Element
-          ? event.target.closest<HTMLAnchorElement>("a[href]")
-          : null;
-      if (menu && anchor && menu.contains(anchor)) {
-        // Let the anchor perform its native navigation before hiding its parent.
-        cancelAnimationFrame(menuCloseFrame);
-        menuCloseFrame = requestAnimationFrame(() => {
-          menu.open = false;
-        });
-      }
-    };
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key !== "Escape" || !menu?.open) return;
-      menu.open = false;
-      summary?.focus();
-      event.preventDefault();
-    };
-    const closeOutside = (event: PointerEvent) => {
-      if (
-        menu?.open &&
-        event.target instanceof Node &&
-        !menu.contains(event.target)
-      ) {
-        menu.open = false;
-      }
-    };
-    if (menu) {
-      menu.addEventListener("click", closeAfterNavigation);
-      document.addEventListener("keydown", closeOnEscape);
-      document.addEventListener("pointerdown", closeOutside, { passive: true });
-    }
+    sections.forEach((_, section) => navigationObserver.observe(section));
 
     return () => {
       disposed = true;
@@ -386,10 +346,6 @@ export default function CafeMotion({
       readyObserver.disconnect();
       navigationObserver.disconnect();
       media?.revert();
-      menu?.removeEventListener("click", closeAfterNavigation);
-      cancelAnimationFrame(menuCloseFrame);
-      document.removeEventListener("keydown", closeOnEscape);
-      document.removeEventListener("pointerdown", closeOutside);
       language.owners = language.owners.filter(
         (owner) => owner.id !== languageOwner.id,
       );

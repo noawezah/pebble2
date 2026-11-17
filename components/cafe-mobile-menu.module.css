@@ -1,0 +1,42 @@
+.panel {
+  max-block-size: calc(100dvh - var(--cafe-header-height));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+
+.panel :global(.pebble-mobile-menu-row) {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.control[data-closing] summary span:first-child,
+.control[data-closing] summary span:last-child {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .control[open] .panel > a {
+    overflow: clip;
+  }
+
+  .control[open] .panel > a :global(.pebble-mobile-menu-row) {
+    animation: rise 490ms cubic-bezier(.22, 1, .36, 1) calc(150ms + var(--row-delay, 0ms)) both;
+    transform-origin: left center;
+  }
+
+  .control[open] .panel > a:nth-child(2) { --row-delay: 55ms; }
+  .control[open] .panel > a:nth-child(3) { --row-delay: 110ms; }
+  .control[open] .panel > a:nth-child(4) { --row-delay: 165ms; }
+
+  .control[open] .panel > a:focus-visible :global(.pebble-mobile-menu-row) {
+    animation: none;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(105%) rotate(3deg); }
+    to { opacity: 1; transform: none; }
+  }
+}

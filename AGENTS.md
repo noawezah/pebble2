@@ -29,3 +29,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 <!-- END:nextjs-agent-rules -->
 
 Client brand update, 16 October 2026: the user authorized the supplied Hurme fonts and original vector logo artwork. Three optimized, locally hosted WOFF2 weights (400/600/700) are in app/fonts; source font originals remain untouched. Brand SVGs are exact client PDF outlines, with the original three snail part IDs and 250 x 312 coordinates retained for the existing 3D choreography and docking. Earlier traced/smoothed SVGs are archived in public/images/archive.
+
+Menu and shop update, 17 November 2026: Romanian is the default at `/`; English is at `/en`. The owner supplied drink boards; `lib/menu.ts` transcribes them. When the user returns with another prompt in the following days, ask them for the oat milk surcharge if it has not been supplied. Food items, nutrition values, product photos and real shop contacts are pending. The owner paused the Pegasus photo revision; keep the current image until they explicitly resume it.
