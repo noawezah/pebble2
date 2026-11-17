@@ -6,7 +6,7 @@ This archive contains the complete PEBBLE project: source code, original and edi
 2. Install Node.js 24 (the version used for this copy was 24.21.0). Open a terminal in the extracted `pebble` folder.
 3. Run `npm ci`, then `npm run dev`. Open the local URL shown by Next.js. The site works with its built-in content and images without any account setup.
 4. For a production check, run `npm run build`. To use the optional Sanity editor, copy `.env.example` to `.env.local`, enter your Sanity project ID and dataset, and restart the server. Sign in to the same Sanity account; its online content is stored by Sanity, outside this archive.
-5. If deploying on Vercel, sign in to the intended Vercel account, import the existing repository or deploy this folder, and set the same public Sanity values if used. Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS address. Hosting and domain settings live in those accounts, outside this archive.
+5. If deploying on Vercel, sign in to the intended Vercel account, reuse the existing `pebble2` project connected to `noawezah/pebble2`, and set the same public Sanity values if used. Keep `https://pebble2.vercel.app` as its permanent Production domain and set Production `NEXT_PUBLIC_SITE_URL=https://pebble2.vercel.app` before building a release. Hosting and domain settings live in those accounts, outside this archive.
 
 On Windows PowerShell, step 4's copy command is `Copy-Item .env.example .env.local`. On macOS or Linux, use `cp .env.example .env.local`.
 

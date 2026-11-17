@@ -20,8 +20,8 @@ export default function StudioPage() {
           the deployment environment, then restart or redeploy.
         </p>
         <p style={{ margin: "20px 0" }}>
-          The café site currently uses the saved local content. The menu stays
-          hidden until items are published.
+          The café site currently uses the saved local content. The customer
+          menu is maintained separately in the site’s menu data.
         </p>
         <Link className="button primary" href="/">
           Return to PEBBLE

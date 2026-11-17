@@ -9,7 +9,7 @@
   --gutter: clamp(20px, 4vw, 72px);
   --gap: 24px;
   --font-display: "Fraunces Variable", Georgia, serif;
-  --font-body: "DM Sans Variable", Arial, sans-serif;
+  --font-body: var(--font-hurme, "DM Sans Variable"), Arial, sans-serif;
   --space-section: clamp(64px, 8vw, 120px);
 }
 @theme inline {
@@ -32,6 +32,7 @@ body {
   background: var(--paper);
   color: var(--charcoal);
   font-family: var(--font-body);
+  font-synthesis: none;
   font-size: 18px;
   line-height: 1.55;
 }
@@ -1077,7 +1078,7 @@ button:focus-visible {
   align-items: center;
   gap: 12px;
 }
-.brand-lockup img {
+.brand-lockup .brand-snail {
   width: 29px;
   height: 37px;
   object-fit: contain;
@@ -1086,7 +1087,7 @@ button:focus-visible {
   .brand-lockup {
     gap: 9px;
   }
-  .brand-lockup img {
+  .brand-lockup .brand-snail {
     width: 25px;
     height: 32px;
   }
