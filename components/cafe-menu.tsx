@@ -20,7 +20,7 @@ const copy = {
     nutrition: "Informații nutriționale",
     nutritionNote: "Valorile nutriționale vor fi adăugate după confirmare.",
     origin: "Întreabă barista despre originea cafelei folosite pentru espresso.",
-    oat: "Lapte de ovăz disponibil ca alternativă.",
+    alternativeMilk: "Lapte de ovăz sau de mazăre (+4 lei).",
     legend: "O inimă = un shot de espresso.",
     shots: { 1: "1 shot de espresso", 2: "2 shoturi de espresso" },
   },
@@ -38,7 +38,7 @@ const copy = {
     nutrition: "Nutrition information",
     nutritionNote: "Nutrition values will be added once confirmed.",
     origin: "Ask the barista about the espresso origins.",
-    oat: "Oat milk is available as an alternative.",
+    alternativeMilk: "Oat milk or pea milk (+4 lei).",
     legend: "One heart = one espresso shot.",
     shots: { 1: "1 espresso shot", 2: "2 espresso shots" },
   },
@@ -110,7 +110,7 @@ export default function CafeMenu({ locale }: { locale: Locale }) {
               </div>
               {id === "drinks" && (
                 <div className={styles.notes}>
-                  <p>{t.origin} {t.oat}</p>
+                  <p>{t.origin} {t.alternativeMilk}</p>
                   <p><span className={styles.hearts} aria-hidden="true">♥</span> {t.legend}</p>
                 </div>
               )}

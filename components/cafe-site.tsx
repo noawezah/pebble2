@@ -187,8 +187,10 @@ export default function CafeSite({
             </div>
           </div>
           <section
+            id="our-place"
             className="pebble-story pebble-pad pebble-section"
             aria-labelledby="place-title"
+            tabIndex={-1}
           >
             <SpotlightRail variant={0} />
             <div className="pebble-story-visual pebble-reveal">
@@ -199,7 +201,7 @@ export default function CafeSite({
                 sizes="(max-width: 700px) 92vw, 46vw"
               />
             </div>
-            <div id="our-place" className="pebble-story-copy" tabIndex={-1}>
+            <div className="pebble-story-copy">
               <p className="eyebrow pebble-section-label">{t.nav[0]}</p>
               <h2 id="place-title" className="pebble-reveal">
                 <Lines text={c.storyTitle[lang]} />
@@ -226,12 +228,14 @@ export default function CafeSite({
             </div>
           </section>
           <section
+            id="coffee"
             className="pebble-coffee pebble-pad pebble-section"
             aria-labelledby="coffee-title"
+            tabIndex={-1}
           >
             <SpotlightRail variant={1} tone="dark" />
             <div className="pebble-coffee-main">
-              <div id="coffee" className="pebble-coffee-copy" tabIndex={-1}>
+              <div className="pebble-coffee-copy">
                 <p className="eyebrow pebble-section-label">{t.coffeeLabel}</p>
                 <h2 id="coffee-title" className="pebble-reveal">
                   <Lines text={t.coffee} />
@@ -337,8 +341,10 @@ export default function CafeSite({
             </div>
           </section>
           <section
+            id="visit"
             className="pebble-visit pebble-pad pebble-section"
             aria-labelledby="visit-title"
+            tabIndex={-1}
           >
             <SpotlightRail variant={5} />
             <Photo
@@ -347,7 +353,7 @@ export default function CafeSite({
               className="pebble-front-photo pebble-reveal"
               sizes="(max-width: 700px) 92vw, 40vw"
             />
-            <div id="visit" className="pebble-visit-copy" tabIndex={-1}>
+            <div className="pebble-visit-copy">
               <p className="eyebrow pebble-section-label">{t.nav[2]}</p>
               <h2 id="visit-title" className="pebble-reveal">
                 <Lines text={t.visit} />

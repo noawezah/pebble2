@@ -27,7 +27,7 @@ Interface: off-white, charcoal and neutral greys, with muted tints for the shop 
 
 The reusable CSS tokens are in `app/globals.css`; the café composition is in `app/cafe.css`. Details and usage rules are in `DESIGN_SYSTEM.md`.
 
-Confirmed local content is in `lib/content.ts`: Str. D. I. Mendeleev 10, 030167 București; weekdays 09:00–18:00; weekends 10:00–19:00. The customer menu uses the owner's reference boards, transcribed in `lib/menu.ts`. Food items, nutrition values and the oat milk surcharge are pending. The shop's four colored product panels and sample contact details are in `components/cafe-shop.tsx`; replace them with confirmed photos and contacts when supplied.
+Confirmed local content is in `lib/content.ts`: Str. D. I. Mendeleev 10, 030167 București; weekdays 09:00–18:00; weekends 10:00–19:00. The customer menu uses the owner's reference boards, transcribed in `lib/menu.ts`. Oat milk and pea milk each carry a 4 lei surcharge. Food items and nutrition values are pending. The shop's four colored product panels and sample contact details are in `components/cafe-shop.tsx`; replace them with confirmed photos and contacts when supplied.
 
 ## Sanity connection
 
