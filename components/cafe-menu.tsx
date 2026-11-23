@@ -1,5 +1,8 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import CafeHeader from "@/components/cafe-header";
+import CafeMenuIslands from "@/components/cafe-menu-islands";
+import { SpotlightRail } from "@/components/spotlight-vine-rail";
 import { cafeRoutes } from "@/lib/cafe-routes";
 import type { Locale } from "@/lib/content";
 import { menuGroups, type DrinkMenuGroup } from "@/lib/menu";
@@ -8,7 +11,6 @@ import styles from "./cafe-menu.module.css";
 const copy = {
   ro: {
     heading: "Meniu",
-    tagline: "Cafea de specialitate, băuturi și cocktailuri.",
     cafe: "Înapoi la PEBBLE",
     skip: "Sari la conținut",
     contents: "Secțiunile meniului",
@@ -26,7 +28,6 @@ const copy = {
   },
   en: {
     heading: "Menu",
-    tagline: "Specialty coffee, drinks and cocktails.",
     cafe: "Back to PEBBLE",
     skip: "Skip to content",
     contents: "Menu sections",
@@ -45,9 +46,28 @@ const copy = {
 };
 
 const chapters = [
-  { id: "drinks", groups: ["coffee", "other-drinks"] },
-  { id: "cocktails", groups: ["aperitivo", "cocktails"] },
+  { id: "drinks", groups: ["coffee", "other-drinks"], variant: 0 },
+  { id: "cocktails", groups: ["aperitivo", "cocktails"], variant: 1 },
 ] as const;
+
+function MenuIsland({ id, title, variant, children }: {
+  id: "drinks" | "cocktails" | "food";
+  title: string;
+  variant: number;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} aria-labelledby={`${id}-title`} tabIndex={-1}>
+      <div className={styles.island} data-menu-island={id}>
+        <SpotlightRail className={styles.islandRail} variant={variant} compact />
+        <div className={styles.islandContent}>
+          <h2 id={`${id}-title`} className={styles.islandHeading}>{title}</h2>
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function MenuGroup({ group, locale }: { group: DrinkMenuGroup; locale: Locale }) {
   const t = copy[locale];
@@ -84,66 +104,63 @@ function MenuGroup({ group, locale }: { group: DrinkMenuGroup; locale: Locale })
 export default function CafeMenu({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const home = cafeRoutes.home[locale];
+  const grid = `pebble-pad seven-grid ${styles.grid}`;
 
   return (
-    <div className="cafe">
+    <div className={`cafe ${styles.menuPage}`}>
       <a className="skip-link" href="#menu-main">{t.skip}</a>
       <CafeHeader locale={locale} page="menu" />
 
-      <main id="menu-main" className="pebble-pad" tabIndex={-1}>
-        <div className={styles.inner}>
+      <main className={styles.menuMain} aria-labelledby="cafe-menu-title">
+        <div className={grid}>
           <div className={styles.intro}>
-            <p className="eyebrow">PEBBLE / {locale === "ro" ? "București" : "Bucharest"}</p>
-            <h1>{t.heading}</h1>
-            <p className={styles.lede}>{t.tagline}</p>
+            <h1 id="cafe-menu-title">{t.heading}</h1>
             <nav className={styles.index} aria-label={t.contents}>
               {chapters.map(({ id }) => <a href={`#${id}`} key={id}>{t.index[id]}</a>)}
               <a href="#food">{t.index.food}</a>
             </nav>
           </div>
-
-          {chapters.map(({ id, groups }, index) => (
-            <section key={id} id={id} className={styles.chapter} aria-labelledby={`${id}-title`} tabIndex={-1}>
-              <div className={styles.chapterHeading}>
-                <p className="eyebrow" aria-hidden="true">0{index + 1}</p>
-                <h2 id={`${id}-title`}>{t[id]}</h2>
-              </div>
-              {id === "drinks" && (
-                <div className={styles.notes}>
-                  <p>{t.origin} {t.alternativeMilk}</p>
-                  <p><span className={styles.hearts} aria-hidden="true">♥</span> {t.legend}</p>
-                </div>
-              )}
-              <div className={styles.groups}>
-                {menuGroups.filter((group) => groups.some((groupId) => groupId === group.id)).map((group) => (
-                  <MenuGroup key={group.id} group={group} locale={locale} />
-                ))}
-              </div>
-            </section>
-          ))}
-
-          <div className={styles.ending}>
-            <section id="food" className={styles.chapter} aria-labelledby="food-title" tabIndex={-1}>
-              <div className={styles.chapterHeading}>
-                <p className="eyebrow" aria-hidden="true">03</p>
-                <h2 id="food-title">{t.food}</h2>
-              </div>
-              <div className={styles.pending}>
-                <p>{t.foodNote}</p>
-                <div>
-                  <h3>{t.nutrition}</h3>
-                  <p>{t.nutritionNote}</p>
-                </div>
-              </div>
-            </section>
-
-            <footer className={styles.footer}>
-              <Link href={home} className="pebble-text-link">
-                <i className="ri-arrow-left-line" aria-hidden="true" />{t.cafe}
-              </Link>
-            </footer>
-          </div>
         </div>
+
+        <CafeMenuIslands className={styles.viewport} label={t.contents}>
+          <div className={grid}>
+            <div id="menu-main" className={styles.deck} tabIndex={-1}>
+              {chapters.map(({ id, groups, variant }) => (
+                <MenuIsland key={id} id={id} title={t[id]} variant={variant}>
+                  {id === "drinks" && (
+                    <div className={styles.notes}>
+                      <p>{t.origin} {t.alternativeMilk}</p>
+                      <p><span className={styles.hearts} aria-hidden="true">♥</span> {t.legend}</p>
+                    </div>
+                  )}
+                  <div className={styles.groups}>
+                    {menuGroups.filter((group) => groups.some((groupId) => groupId === group.id)).map((group) => (
+                      <MenuGroup key={group.id} group={group} locale={locale} />
+                    ))}
+                  </div>
+                </MenuIsland>
+              ))}
+
+              <div className={styles.ending}>
+                <MenuIsland id="food" title={t.food} variant={2}>
+                  <div className={styles.pending}>
+                    <p>{t.foodNote}</p>
+                    <div>
+                      <h3>{t.nutrition}</h3>
+                      <p>{t.nutritionNote}</p>
+                    </div>
+                  </div>
+                </MenuIsland>
+
+                <footer className={styles.footer}>
+                  <Link href={home} className="pebble-text-link">
+                    <i className="ri-arrow-left-line" aria-hidden="true" />{t.cafe}
+                  </Link>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </CafeMenuIslands>
       </main>
     </div>
   );

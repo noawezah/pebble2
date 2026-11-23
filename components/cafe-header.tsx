@@ -59,7 +59,7 @@ export default function CafeHeader({ locale, page = "home" }: { locale: Locale; 
 
   return (
     <header className="cafe-header pebble-header pebble-pad">
-      <CafeAnchorAlignment />
+      {page === "home" && <CafeAnchorAlignment />}
       <Link href={home} className="small-brand" aria-label={t.home}><Brand /></Link>
       <nav className="pebble-desktop-nav" aria-label={t.navigation}>
         {navigationLinks(false)}

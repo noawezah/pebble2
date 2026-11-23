@@ -7,6 +7,7 @@ type SpotlightRailProps = {
   tone?: Tone;
   id?: string;
   className?: string;
+  compact?: boolean;
 };
 
 type Palette = {
@@ -142,7 +143,7 @@ function Spotlight({ x, railY, angle, scale, hangerId, fixtureId }: {
   );
 }
 
-function RailScene({ variant, tone, mobile }: { variant: number; tone: Tone; mobile: boolean }) {
+function RailScene({ variant, tone, mobile, compact }: { variant: number; tone: Tone; mobile: boolean; compact: boolean }) {
   // useId keeps fragment references unique even if a layout variant is reused.
   const shapePrefix = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const sprigId = `${shapePrefix}-sprig`;
@@ -150,8 +151,9 @@ function RailScene({ variant, tone, mobile }: { variant: number; tone: Tone; mob
   const hangerId = `${shapePrefix}-hanger`;
   const fixtureId = `${shapePrefix}-fixture`;
   const width = mobile ? 390 : 1800;
-  const height = mobile ? 164 : 250;
-  const railY = mobile ? 52 : 79;
+  const height = compact ? (mobile ? 104 : 150) : (mobile ? 164 : 250);
+  const railY = compact ? (mobile ? 34 : 50) : (mobile ? 52 : 79);
+  const foliageScale = compact ? 0.62 : 1;
   const random = seededRandom(0x51a7 + (Math.abs(Math.trunc(variant)) % 6) * 997 + (mobile ? 47 : 0));
   const palette: Palette = tone === "dark"
     ? {
@@ -177,22 +179,22 @@ function RailScene({ variant, tone, mobile }: { variant: number; tone: Tone; mob
   const lamps = lampSlots.map((slot, index) => ({
     x: slot + (random() - 0.5) * (mobile ? 18 : 55),
     angle: (random() - 0.5) * 44 + (index % 2 === 0 ? -6 : 6),
-    scale: mobile ? 0.84 + random() * 0.16 : 1.37 + random() * 0.31,
+    scale: (mobile ? 0.84 + random() * 0.16 : 1.37 + random() * 0.31) * (compact ? (mobile ? 0.6 : 0.56) : 1),
   }));
   const sprigCount = mobile ? 17 : 42;
   const sprigs = Array.from({ length: sprigCount }, (_, index) => ({
     x: (index / (sprigCount - 1)) * width + (random() - 0.5) * (mobile ? 25 : 60),
     y: railY - 3 + (random() - 0.5) * 12,
-    scale: mobile ? 0.44 + random() * 0.37 : 0.74 + random() * 0.48,
+    scale: (mobile ? 0.44 + random() * 0.37 : 0.74 + random() * 0.48) * foliageScale,
     angle: (random() - 0.5) * 76,
   }));
   const vineCount = mobile ? 11 : 22;
   const vines = Array.from({ length: vineCount }, (_, index) => ({
     x: ((index + 0.25 + random() * 0.5) / vineCount) * width,
-    length: mobile ? 40 + random() * 72 : 65 + random() * 112,
+    length: (mobile ? 40 + random() * 72 : 65 + random() * 112) * (compact ? (mobile ? 0.52 : 0.51) : 1),
     sway: (random() - 0.5) * (mobile ? 25 : 65),
     leafCount: mobile ? 3 + Math.floor(random() * 2) : 4 + Math.floor(random() * 3),
-    leafScale: mobile ? 0.42 + random() * 0.18 : 0.5 + random() * 0.27,
+    leafScale: (mobile ? 0.42 + random() * 0.18 : 0.5 + random() * 0.27) * foliageScale,
     seed: 0x71af + variant * 997 + index * 53 + (mobile ? 31 : 0),
   }));
 
@@ -239,7 +241,7 @@ function RailScene({ variant, tone, mobile }: { variant: number; tone: Tone; mob
       <g opacity=".97">
         {sprigs.map((sprig, index) => <FernSprig key={index} {...sprig} shapeId={sprigId} />)}
       </g>
-      <path d={`M0 ${railY - 6} H${width}`} fill="none" stroke={palette.track} strokeWidth={mobile ? 9 : 11} />
+      <path d={`M0 ${railY - 6} H${width}`} fill="none" stroke={palette.track} strokeWidth={(mobile ? 9 : 11) * (compact ? 0.7 : 1)} />
       <path d={`M0 ${railY - 9} H${width}`} fill="none" stroke={palette.highlight} strokeWidth="1.5" opacity=".72" />
       <path d={`M0 ${railY - 1} H${width}`} fill="none" stroke={palette.wire} strokeWidth="1" opacity=".8" />
       <g opacity=".96">
@@ -254,11 +256,11 @@ function RailScene({ variant, tone, mobile }: { variant: number; tone: Tone; mob
  * A front-facing illustration inspired by the cafe's suspended lighting and plants.
  * `tone` describes the section background: light paper or dark charcoal.
  */
-export function SpotlightRail({ variant, tone = "light", id, className }: SpotlightRailProps) {
+export function SpotlightRail({ variant, tone = "light", id, className, compact = false }: SpotlightRailProps) {
   return (
-    <div id={id} className={["spotlight-vine-rail", className].filter(Boolean).join(" ")}>
-      <RailScene variant={variant} tone={tone} mobile={false} />
-      <RailScene variant={variant} tone={tone} mobile />
+    <div id={id} className={["spotlight-vine-rail", compact && "spotlight-vine-rail--compact", className].filter(Boolean).join(" ")}>
+      <RailScene variant={variant} tone={tone} mobile={false} compact={compact} />
+      <RailScene variant={variant} tone={tone} mobile compact={compact} />
     </div>
   );
 }

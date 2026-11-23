@@ -1,37 +1,60 @@
-.inner {
-  max-width: 1100px;
+.menuPage {
+  display: grid;
+  grid-template-rows: var(--cafe-header-height) minmax(0, 1fr);
+  block-size: 100vh;
+  block-size: 100dvh;
+}
+
+:global(html):has(.menuPage) {
+  overscroll-behavior-y: none;
+  scrollbar-gutter: auto;
+}
+
+.menuMain {
+  --deck-inset: clamp(8px, 1.5svh, 16px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-block-size: 0;
+  background: radial-gradient(ellipse at top, #f9f6ed, transparent 880px), #f0ece3;
+}
+
+.grid {
+  inline-size: 100%;
   margin-inline: auto;
 }
 
+.intro,
+.deck {
+  grid-column: 3 / span 3;
+  min-inline-size: 0;
+}
+
 .intro {
-  padding-top: clamp(30px, 4.6vw, 70px);
-  padding-bottom: clamp(20px, 3vw, 38px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding-block: clamp(6px, 1.7svh, 17px) 4px;
 }
 
-.intro h1 {
-  font-size: clamp(62px, 10vw, 142px);
+.menuMain .intro h1 {
+  font-size: clamp(32px, min(4vw, 8svh), 56px);
   line-height: 0.96;
-  margin-top: 11px;
-}
-
-.lede {
-  margin-top: 17px;
-  color: var(--muted);
-  font-size: clamp(16px, 2vw, 24px);
+  margin: 0;
 }
 
 .index {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: clamp(18px, 2.5vw, 28px);
+  gap: 5px;
 }
 
 .index a {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
-  padding: 7px 13px;
+  padding: 7px clamp(9px, 1.05vw, 14px);
   border: 1px solid var(--rule);
   border-radius: 999px;
   font-size: 14px;
@@ -43,32 +66,85 @@
   color: var(--paper);
 }
 
-.chapter {
-  border-top: 1px solid var(--rule);
-  padding-block: clamp(23px, 3vw, 42px) clamp(36px, 5vw, 70px);
+.viewport {
+  container-type: size;
+  min-block-size: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+  scroll-padding-block-start: var(--deck-inset);
+  scrollbar-gutter: stable both-edges;
+  scrollbar-width: thin;
+  scrollbar-color: #9c9081 transparent;
 }
 
-.chapterHeading {
+.viewport:focus-visible {
+  outline: 2px solid var(--muted);
+  outline-offset: -2px;
+}
+
+.deck {
+  container-type: inline-size;
   display: grid;
-  gap: 7px;
-  margin-bottom: clamp(18px, 3vw, 34px);
+  gap: clamp(16px, 3.5svh, 36px);
+  padding-block-start: var(--deck-inset);
 }
 
-.chapterHeading > p {
-  color: var(--muted);
+.island {
+  --island-color: #e1e8d8;
+  --island-paper: #f9f9f1;
+  --island-line: #d4dccb;
+  --note-fill: #edf0e3;
+  position: relative;
+  overflow: clip;
+  border: 1px solid var(--island-line);
+  border-radius: clamp(17px, 2.6vw, 32px);
+  background: var(--island-paper);
+  box-shadow: 0 3px 7px #352c1810, 0 13px 32px #352c181b;
+  transform: scale(var(--island-scale, 1));
+  transform-origin: top center;
 }
 
-.chapterHeading h2 {
-  font-size: clamp(32px, 5.8vw, 66px);
+.island[data-menu-island="cocktails"] {
+  --island-color: #ead5cc;
+  --island-paper: #fbf3ee;
+  --island-line: #e4d2ca;
+}
+
+.island[data-menu-island="food"] {
+  --island-color: #f1dfb7;
+  --island-paper: #fcf7ea;
+  --island-line: #e9ddc2;
+  --note-fill: #f7edd7;
+}
+
+.island .islandRail {
+  width: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, var(--island-color), var(--island-paper));
+}
+
+.islandContent {
+  padding: 0 clamp(14px, 5cqi, 36px) clamp(18px, 5cqi, 36px);
+}
+
+.islandContent .islandHeading {
+  font-size: clamp(28px, 7cqi, 48px);
+  margin-bottom: clamp(14px, 4cqi, 28px);
   text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewport { scroll-behavior: auto; }
+  .island { transform: none; }
 }
 
 .notes,
 .pending {
-  padding: clamp(14px, 2.5vw, 24px);
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  background: #ebe7dd;
+  padding: clamp(11px, 2.4vw, 22px);
+  border: 1px solid var(--island-line);
+  border-radius: 12px;
+  background: var(--note-fill);
   font-size: clamp(14px, 1.4vw, 16px);
 }
 
@@ -84,12 +160,12 @@
 .groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(26px, 5vw, 70px);
+  gap: clamp(18px, 5cqi, 42px);
 }
 
 .group h3 {
   font-family: var(--font-display);
-  font-size: clamp(22px, 2.8vw, 34px);
+  font-size: clamp(22px, 4.8cqi, 31px);
   font-weight: 800;
   line-height: 1.13;
   margin-bottom: 13px;
@@ -99,7 +175,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--island-line);
 }
 
 .item {
@@ -107,7 +183,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
   gap: 12px;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--island-line);
   padding-block: 11px;
   font-size: clamp(15px, 1.5vw, 17px);
 }
@@ -159,33 +235,35 @@
   font-weight: 700;
 }
 
-/* Let the last chapter reach the header when selected, without stretching the normal menu. */
-.ending:has(:target) {
+/* Only reserve extra scroll room while the last island is the jump target. */
+.ending:has(> :target) {
   display: flex;
   flex-direction: column;
-  min-block-size: calc(100dvh - var(--cafe-header-height));
+  min-block-size: calc(100cqh - var(--deck-inset));
 }
 
-.ending:has(:target) .footer {
+.ending:has(> :target) .footer {
   margin-top: auto;
 }
 
 .footer {
-  border-top: 1px solid var(--rule);
-  padding-block: 18px 48px;
+  padding-block: 16px clamp(27px, 5svh, 48px);
 }
 
 .footer a { min-height: 44px; }
 
+@media (min-width: 701px) and (max-width: 920px) {
+  .intro,
+  .deck { grid-column: 2 / span 5; }
+}
+
 @media (max-width: 700px) {
-  .intro {
-    padding-top: clamp(20px, 3.5svh, 30px);
-  }
+  .menuMain { --pebble-gutter: clamp(12px, 4vw, 22px); }
+  .intro,
+  .deck { grid-column: 1 / -1; }
+}
 
-  .intro h1 {
-    font-size: clamp(52px, 8.8svh, 66px);
-  }
-
+@container (max-width: 480px) {
   .groups,
   .pending { grid-template-columns: 1fr; }
 }
