@@ -48,6 +48,7 @@ const cookieDeclaredAllergens = localized(
 export const archiveProducts: readonly FoodProduct[] = [
   {
     id: "salty-kiss",
+    ingredientsInDialog: true,
     name: productName("Salty Kiss"),
     contains: cookieBaseContains,
     declaredAllergens: cookieDeclaredAllergens,
@@ -62,6 +63,7 @@ export const archiveProducts: readonly FoodProduct[] = [
   },
   {
     id: "pistachio-fever",
+    ingredientsInDialog: true,
     name: productName("Pistachio Fever"),
     contains: localized("Grâu (gluten), lapte, ouă, soia, fistic", "Wheat (gluten), milk, eggs, soy, pistachios"),
     declaredAllergens: cookieDeclaredAllergens,
@@ -76,6 +78,7 @@ export const archiveProducts: readonly FoodProduct[] = [
   },
   {
     id: "caramel-pecan",
+    ingredientsInDialog: true,
     name: productName("Caramel Pecan"),
     contains: localized("Grâu (gluten), lapte, ouă, soia, nuci pecan", "Wheat (gluten), milk, eggs, soy, pecans"),
     declaredAllergens: cookieDeclaredAllergens,
@@ -90,6 +93,7 @@ export const archiveProducts: readonly FoodProduct[] = [
   },
   {
     id: "snickers-bomb",
+    ingredientsInDialog: true,
     name: productName("Snickers Bomb"),
     contains: localized("Grâu (gluten), lapte, ouă, soia, arahide", "Wheat (gluten), milk, eggs, soy, peanuts"),
     declaredAllergens: cookieDeclaredAllergens,
@@ -104,6 +108,7 @@ export const archiveProducts: readonly FoodProduct[] = [
   },
   {
     id: "bloody-cookie",
+    ingredientsInDialog: true,
     name: productName("Bloody Cookie"),
     // The ingredient list specifies black sesame paste even though the allergen summary omits sesame.
     contains: localized("Grâu (gluten), lapte, ouă, soia, nuci, susan", "Wheat (gluten), milk, eggs, soy, walnuts, sesame"),
@@ -123,8 +128,8 @@ export const archiveProducts: readonly FoodProduct[] = [
     portionG: 99.6,
     contains: localized("Grâu (gluten), ouă, lapte, nuci", "Wheat (gluten), eggs, milk, walnuts"),
     ingredients: localized(
-      "Zahăr (21 g), ulei de floarea-soarelui (16 ml), lapte (16 ml), morcov (13 g), făină de grâu (13 g), nuci (7,90 g), ou (5,20 g), albuș de ou (4,80 g), gălbenuș de ou (1,60 g), praf de copt (0,60 g), scorțișoară (0,30 g), nucșoară (0,10 g), sare (0,10 g).",
-      "Sugar (21 g), sunflower oil (16 ml), milk (16 ml), carrot (13 g), wheat flour (13 g), walnuts (7.90 g), egg (5.20 g), egg white (4.80 g), egg yolk (1.60 g), baking powder (0.60 g), cinnamon (0.30 g), nutmeg (0.10 g), salt (0.10 g).",
+      "Zahăr, ulei de floarea-soarelui, lapte, morcov, făină de grâu, nuci, ou, albuș de ou, gălbenuș de ou, praf de copt, scorțișoară, nucșoară, sare.",
+      "Sugar, sunflower oil, milk, carrot, wheat flour, walnuts, egg, egg white, egg yolk, baking powder, cinnamon, nutmeg, salt.",
     ),
     nutrition: nutrition("100g", ["1501.3", "360.1"], {
       fat: "22.9", saturatedFat: "2.8", carbohydrates: "32.8", sugars: "22.9", protein: "4.7", salt: "0.3",
@@ -139,8 +144,8 @@ export const archiveProducts: readonly FoodProduct[] = [
     portionG: 83.3,
     contains: localized("Grâu (gluten), ouă, lapte", "Wheat (gluten), eggs, milk"),
     ingredients: localized(
-      "Făină de grâu (16 g), lapte (16 g), ulei de floarea-soarelui (16 g), zahăr (16 g), albuș de ou (8,70 g), gălbenuș de ou (5 g), pudră de cacao (3,90 g), glazură de ciocolată (1 g), praf de copt (0,60 g), sare (0,10 g).",
-      "Wheat flour (16 g), milk (16 g), sunflower oil (16 g), sugar (16 g), egg white (8.70 g), egg yolk (5 g), cocoa powder (3.90 g), chocolate glaze (1 g), baking powder (0.60 g), salt (0.10 g).",
+      "Făină de grâu, lapte, ulei de floarea-soarelui, zahăr, albuș de ou, gălbenuș de ou, pudră de cacao, glazură de ciocolată, praf de copt, sare.",
+      "Wheat flour, milk, sunflower oil, sugar, egg white, egg yolk, cocoa powder, chocolate glaze, baking powder, salt.",
     ),
     nutrition: nutrition("100g", ["1580.8", "378.7"], {
       fat: "23.5", saturatedFat: "4", carbohydrates: "37.2", sugars: "20.9", protein: "5.9", salt: "0.4",

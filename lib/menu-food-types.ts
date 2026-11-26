@@ -13,6 +13,7 @@ export type FoodProduct = {
   declaredAllergens?: Localized;
   allergenNote?: Localized;
   ingredients?: Localized;
+  ingredientsInDialog?: boolean;
   nutrition?: FoodNutrition;
   nutritionPerPortion?: FoodNutrition;
 };

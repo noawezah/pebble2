@@ -13,7 +13,6 @@ import styles from "./cafe-menu.module.css";
 
 const copy = {
   ro: {
-    heading: "Meniu",
     cafe: "Înapoi la PEBBLE",
     skip: "Sari la conținut",
     contents: "Secțiunile meniului",
@@ -30,7 +29,6 @@ const copy = {
     shots: { 1: "1 shot de espresso", 2: "2 shoturi de espresso" },
   },
   en: {
-    heading: "Menu",
     cafe: "Back to PEBBLE",
     skip: "Skip to content",
     contents: "Menu sections",
@@ -116,13 +114,10 @@ export default function CafeMenu({ locale }: { locale: Locale }) {
 
       <main className={styles.menuMain} aria-labelledby="cafe-menu-title">
         <div className={grid}>
-          <div className={styles.intro}>
-            <h1 id="cafe-menu-title">{t.heading}</h1>
-            <nav className={styles.index} aria-label={t.contents}>
-              {chapters.map(({ id }) => <a href={`#${id}`} key={id}>{t.index[id]}</a>)}
-              <a href="#food">{t.index.food}</a>
-            </nav>
-          </div>
+          <nav className={styles.index} aria-label={t.contents}>
+            {chapters.map(({ id }) => <a href={`#${id}`} key={id}>{t.index[id]}</a>)}
+            <a href="#food">{t.index.food}</a>
+          </nav>
         </div>
 
         <CafeMenuIslands className={styles.viewport} label={t.contents}>
@@ -132,7 +127,8 @@ export default function CafeMenu({ locale }: { locale: Locale }) {
                 <MenuIsland key={id} id={id} title={t[id]} variant={variant}>
                   {id === "drinks" && (
                     <div className={styles.notes}>
-                      <p>{t.origin} {t.alternativeMilk}</p>
+                      <p>{t.origin}</p>
+                      <p>{t.alternativeMilk}</p>
                       <p><span className={styles.hearts} aria-hidden="true">♥</span> {t.legend}</p>
                     </div>
                   )}

@@ -9,6 +9,7 @@ const copy = {
   ro: {
     close: "Închide detaliile",
     details: "Alergeni și valori nutriționale",
+    cookieDetails: "Ingrediente, alergeni și valori nutriționale",
     allergens: "Alergeni",
     contains: "Conține",
     declared: "Alergeni declarați de furnizor",
@@ -22,6 +23,7 @@ const copy = {
   en: {
     close: "Close details",
     details: "Allergens and nutrition",
+    cookieDetails: "Ingredients, allergens and nutrition",
     allergens: "Allergens",
     contains: "Contains",
     declared: "Allergens listed by the supplier",
@@ -100,17 +102,22 @@ export default function CafeMenuFood({ locale, groups, rail }: {
             <h3>{group.title}</h3>
             <ul className={styles.items} role="list">
               {group.products.map((item) => (
-                <li key={item.id}>
+                <li key={item.id} className={styles.foodItem}>
                   <button
                     className={styles.foodTrigger}
                     type="button"
                     aria-haspopup="dialog"
-                    aria-describedby="food-detail-description"
+                    aria-describedby={item.ingredientsInDialog ? "cookie-detail-description" : "food-detail-description"}
                     onClick={(event) => openProduct(item, event)}
                   >
                     <span>{item.name[locale]}</span>
-                    <i className="ri-arrow-right-up-line" aria-hidden="true" />
+                    <i className="ri-corner-right-down-fill" aria-hidden="true" />
                   </button>
+                  {item.ingredients && !item.ingredientsInDialog && (
+                    <p className={`${styles.ingredients} ${styles.foodIngredients}`}>
+                      <strong>{t.ingredients}:</strong> {item.ingredients[locale]}
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>
@@ -118,6 +125,7 @@ export default function CafeMenuFood({ locale, groups, rail }: {
         ))}
       </div>
       <span id="food-detail-description" className="sr-only">{t.details}</span>
+      <span id="cookie-detail-description" className="sr-only">{t.cookieDetails}</span>
 
       <dialog
         ref={dialogRef}
@@ -157,7 +165,7 @@ export default function CafeMenuFood({ locale, groups, rail }: {
                   ) : <p>{t.missingNutrition}</p>}
                 </div>
               </section>
-              {product.ingredients && (
+              {product.ingredients && product.ingredientsInDialog && (
                 <section aria-labelledby="food-ingredients-title">
                   <h3 id="food-ingredients-title">{t.ingredients}</h3>
                   <p>{product.ingredients[locale]}</p>

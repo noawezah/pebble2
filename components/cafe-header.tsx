@@ -30,43 +30,59 @@ const copy = {
 export default function CafeHeader({ locale, page = "home" }: { locale: Locale; page?: CafePage }) {
   const t = copy[locale];
   const home = cafeRoutes.home[locale];
-  const homeAnchor = page === "home" ? "" : home;
+  const menuPage = page === "menu";
+  const homeAnchor = menuPage ? home : "";
   const links = [
     { href: `${homeAnchor}#our-place`, label: t.place },
     { href: `${homeAnchor}#coffee`, label: t.coffee },
-    { href: page === "menu" ? "#menu-main" : cafeRoutes.menu[locale], label: t.menu, isMenu: true },
+    { href: cafeRoutes.menu[locale], label: t.menu, isMenu: true },
     { href: `${homeAnchor}#visit`, label: t.visit },
   ];
+  const [place, coffee, , visit] = links;
 
-  function navigationLinks(mobile: boolean) {
-    return links.map(({ href, label, isMenu }) => {
-      const active = isMenu && page === "menu";
-      const current = active ? { "aria-current": "page" as const, "data-active": "true" } : {};
-      const content = mobile ? (
-        <span className="pebble-mobile-menu-row">
-          {label}
-          <i className={isMenu ? "ri-arrow-right-line" : "ri-arrow-right-down-line"} aria-hidden="true" />
-        </span>
-      ) : label;
+  function navigationLink({ href, label, isMenu }: (typeof links)[number], mobile = false) {
+    const content = mobile ? (
+      <span className="pebble-mobile-menu-row">
+        {label}
+        <i className={isMenu ? "ri-arrow-right-line" : "ri-arrow-right-down-line"} aria-hidden="true" />
+      </span>
+    ) : label;
 
-      return href.startsWith("#") ? (
-        <a key={href} href={href} {...current}>{content}</a>
-      ) : (
-        <Link key={href} href={href}>{content}</Link>
-      );
-    });
+    return href.startsWith("#") ? (
+      <a key={href} href={href}>{content}</a>
+    ) : (
+      <Link key={href} href={href}>{content}</Link>
+    );
   }
 
   return (
-    <header className="cafe-header pebble-header pebble-pad">
+    <header className="cafe-header pebble-header pebble-pad" data-cafe-page={page}>
       {page === "home" && <CafeAnchorAlignment />}
       <Link href={home} className="small-brand" aria-label={t.home}><Brand /></Link>
       <nav className="pebble-desktop-nav" aria-label={t.navigation}>
-        {navigationLinks(false)}
+        {menuPage ? (
+          <>
+            <div className="pebble-menu-header-side">
+              {navigationLink(place)}
+              {navigationLink(coffee)}
+            </div>
+            <h1 id="cafe-menu-title" className="pebble-menu-header-title">
+              <a href="#menu-main" aria-current="page">{t.menu}</a>
+            </h1>
+            <div className="pebble-menu-header-side">{navigationLink(visit)}</div>
+          </>
+        ) : links.map((link) => navigationLink(link))}
       </nav>
       <div className="pebble-header-tools">
         <CafeLanguage locale={locale} page={page} />
-        <CafeMobileMenu label={t.toggle}>{navigationLinks(true)}</CafeMobileMenu>
+        <CafeMobileMenu label={t.toggle}>
+          {(menuPage ? [place, coffee, visit] : links).map((link) => navigationLink(link, true))}
+          {menuPage && (
+            <div className="pebble-menu-dropdown-language">
+              <CafeLanguage locale={locale} page={page} />
+            </div>
+          )}
+        </CafeMobileMenu>
       </div>
     </header>
   );
