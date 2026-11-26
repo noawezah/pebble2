@@ -111,7 +111,8 @@
   --island-line: #e4d2ca;
 }
 
-.island[data-menu-island="food"] {
+.island[data-menu-island="food"],
+.foodDialog {
   --island-color: #f1dfb7;
   --island-paper: #fcf7ea;
   --island-line: #e9ddc2;
@@ -140,7 +141,7 @@
 }
 
 .notes,
-.pending {
+.foodAvailability {
   padding: clamp(11px, 2.4vw, 22px);
   border: 1px solid var(--island-line);
   border-radius: 12px;
@@ -225,14 +226,179 @@
   white-space: nowrap;
 }
 
-.pending {
+.foodAvailability {
+  margin-block-end: clamp(18px, 4cqi, 30px);
+}
+
+.foodGroups {
   display: grid;
-  gap: 14px 24px;
+  gap: 20px 30px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.pending h3 {
+.foodTrigger {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  padding-block: 9px;
+  border-bottom: 1px solid var(--island-line);
+  color: inherit;
+  text-align: start;
+  font-size: clamp(15px, 1.5vw, 17px);
   font-weight: 700;
+}
+
+.foodTrigger i {
+  font-size: 17px;
+}
+
+.foodTrigger:hover span {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.foodTrigger:focus-visible {
+  outline-offset: -2px;
+}
+
+.foodDialog {
+  position: fixed;
+  inset: 0;
+  width: min(38rem, calc(100% - 24px));
+  max-height: calc(100vh - 24px);
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  overflow: auto;
+  overscroll-behavior: contain;
+  color: var(--charcoal);
+  box-shadow: 0 18px 54px #1d191558;
+  transform: none;
+}
+
+.foodDialog::backdrop {
+  background: #231b15a8;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .foodDialog[open] {
+    animation: foodDetailIn 200ms ease-out both;
+  }
+
+  @keyframes foodDetailIn {
+    from { opacity: 0; translate: 0 8px; }
+    to { opacity: 1; translate: 0; }
+  }
+}
+
+.closeBar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: end;
+  height: 0;
+  padding-inline: 12px;
+}
+
+.closeFood {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: 12px;
+  border: 1px solid var(--island-line);
+  border-radius: 50%;
+  background: var(--island-paper);
+  color: var(--charcoal);
+  box-shadow: 0 1px 8px #352c1820;
+}
+
+.closeFood:hover {
+  background: var(--note-fill);
+}
+
+.foodDetailContent {
+  display: grid;
+  gap: 17px;
+  padding: 0 clamp(16px, 4.5vw, 32px) clamp(22px, 5vw, 36px);
+  font-size: 15px;
+}
+
+.foodDetailContent > h2 {
+  padding-inline-end: 38px;
+  font-size: clamp(28px, 5.5vw, 46px);
+  text-wrap: balance;
+}
+
+.serving {
+  margin-top: -11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.foodDetailContent section > h3 {
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.allergenBox {
+  padding: 12px 15px;
+  border: 1px solid #dfc9a6;
+  border-radius: 12px;
+  background: #f6e8d5;
+}
+
+.allergenBox p + p {
+  margin-top: 6px;
+}
+
+.allergenReminder {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.nutritionTables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  align-items: start;
+  gap: 14px 20px;
+}
+
+.nutritionTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.nutritionTable caption {
+  padding-bottom: 4px;
+  color: var(--muted);
+  text-align: start;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nutritionTable th,
+.nutritionTable td {
+  padding-block: 6px;
+  border-bottom: 1px solid var(--island-line);
+  text-align: start;
+  vertical-align: baseline;
+}
+
+.nutritionTable th {
+  padding-inline-end: 10px;
+  font-weight: 400;
+}
+
+.nutritionTable td {
+  text-align: end;
+  white-space: nowrap;
 }
 
 /* Only reserve extra scroll room while the last island is the jump target. */
@@ -265,5 +431,5 @@
 
 @container (max-width: 480px) {
   .groups,
-  .pending { grid-template-columns: 1fr; }
+  .foodGroups { grid-template-columns: 1fr; }
 }

@@ -1,11 +1,14 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import CafeHeader from "@/components/cafe-header";
+import CafeMenuFood from "@/components/cafe-menu-food";
 import CafeMenuIslands from "@/components/cafe-menu-islands";
 import { SpotlightRail } from "@/components/spotlight-vine-rail";
 import { cafeRoutes } from "@/lib/cafe-routes";
 import type { Locale } from "@/lib/content";
 import { menuGroups, type DrinkMenuGroup } from "@/lib/menu";
+import { archiveProducts } from "@/lib/food-archive";
+import { sandwichProducts } from "@/lib/food-sandwiches";
 import styles from "./cafe-menu.module.css";
 
 const copy = {
@@ -18,9 +21,9 @@ const copy = {
     drinks: "Cafea și alte băuturi",
     cocktails: "Cocktailuri",
     food: "Sandvișuri și gustări",
-    foodNote: "Pentru sandvișuri, produse de patiserie și alte gustări, întreabă-ne la bar ce avem astăzi.",
-    nutrition: "Informații nutriționale",
-    nutritionNote: "Valorile nutriționale vor fi adăugate după confirmare.",
+    foodNote: "Disponibilitatea variază. Vezi la tejghea ce avem astăzi.",
+    sandwiches: "Sandvișuri",
+    sweets: "Fursecuri și prăjituri",
     origin: "Întreabă barista despre originea cafelei folosite pentru espresso.",
     alternativeMilk: "Lapte de ovăz sau de mazăre (+4 lei).",
     legend: "O inimă = un shot de espresso.",
@@ -35,9 +38,9 @@ const copy = {
     drinks: "Coffee and other drinks",
     cocktails: "Cocktails",
     food: "Sandwiches and snacks",
-    foodNote: "Ask us at the counter what sandwiches, pastries and other snacks are available today.",
-    nutrition: "Nutrition information",
-    nutritionNote: "Nutrition values will be added once confirmed.",
+    foodNote: "Availability varies. Check the counter to see what’s available today.",
+    sandwiches: "Sandwiches",
+    sweets: "Cookies and cakes",
     origin: "Ask the barista about the espresso origins.",
     alternativeMilk: "Oat milk or pea milk (+4 lei).",
     legend: "One heart = one espresso shot.",
@@ -143,13 +146,15 @@ export default function CafeMenu({ locale }: { locale: Locale }) {
 
               <div className={styles.ending}>
                 <MenuIsland id="food" title={t.food} variant={2}>
-                  <div className={styles.pending}>
-                    <p>{t.foodNote}</p>
-                    <div>
-                      <h3>{t.nutrition}</h3>
-                      <p>{t.nutritionNote}</p>
-                    </div>
-                  </div>
+                  <p className={styles.foodAvailability}>{t.foodNote}</p>
+                  <CafeMenuFood
+                    locale={locale}
+                    groups={[
+                      { title: t.sandwiches, products: sandwichProducts },
+                      { title: t.sweets, products: archiveProducts },
+                    ]}
+                    rail={<SpotlightRail className={styles.islandRail} variant={3} compact />}
+                  />
                 </MenuIsland>
 
                 <footer className={styles.footer}>
