@@ -25,7 +25,7 @@ const copy = {
       "Industrial, dar personal. Expresiv, dar simplu. PEBBLE îmbină litere generoase cu detalii discrete și spațiu pentru a respira.",
     type: "Litere cu personalitate.",
     typeNote:
-      "Fraunces Black aduce forme moi, apropiate de Cooper Black. DM Sans păstrează informația clară. Numele brandului rămâne întotdeauna PEBBLE.",
+      "Fraunces Black aduce forme moi, apropiate de Cooper Black. Hurme Geometric Sans păstrează informația clară. Numele brandului rămâne întotdeauna PEBBLE.",
     display: "O pauză bună.",
     body: "Ne găsești între cafenelele cunoscute din centrul Bucureștiului. Un loc mic, cu cafea de specialitate MERON și timp pentru tine.",
     colors: "Din spațiu,\npe ecran.",
@@ -87,7 +87,7 @@ const copy = {
       "Industrial, yet personal. Expressive, yet simple. PEBBLE brings generous letterforms together with quiet details and room to breathe.",
     type: "Letters with character.",
     typeNote:
-      "Fraunces Black brings soft shapes close to Cooper Black. DM Sans keeps information clear. The brand name is always PEBBLE.",
+      "Fraunces Black brings soft shapes close to Cooper Black. Hurme Geometric Sans keeps information clear. The brand name is always PEBBLE.",
     display: "A good pause.",
     body: "Find us between the familiar cafés of central Bucharest. A small place, with MERON specialty coffee and a little time for yourself.",
     colors: "From the space,\nto the screen.",
@@ -341,7 +341,7 @@ export default function DesignSystem() {
         <section id="type" className="type-section page-pad section-space">
           <div className="section-label eyebrow">
             <span>02 — {t.nav[1]}</span>
-            <span>Fraunces + DM Sans</span>
+            <span>Fraunces + Hurme Geometric Sans</span>
           </div>
           <div className="section-intro">
             <h2 className="section-title">{t.type}</h2>

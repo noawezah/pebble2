@@ -5,12 +5,12 @@ All generated images used the built-in ImageGen tool, not the API/CLI fallback. 
 | Website image | Master | Usage |
 |---|---|---|
 | Empty interior | interior-empty.png | Hero on website and design system |
-| Natural seahorse flat white | flat-white-seahorse-natural.png | Coffee section |
+| Pegasus latte art composite | pegasus-real-editorial.png | Coffee section (current) |
 | La Marzocco and bar | marzocco-bar.png | Coffee editorial image |
 | Moss wall with snails | snail-wall.png | Our place section |
 | Enhanced storefront | front-enhanced.png | Visit section |
 
-Original reference files: `pebble-logo.png`, `interior-reference.png`, `front-reference.png`. The header snail in `snail.svg` is deterministically vector-traced from the supplied logo, using `scripts/trace-snail.cjs`.
+Original reference files: `pebble-logo.png`, `interior-reference.png`, `front-reference.png`. The current header snail and PEBBLE wordmark retain the client's exact vector outlines. The earlier raster-traced mark from `scripts/trace-snail.cjs` is archived in `public/images/archive/`.
 
 Earlier variants are retained for revision history but not used on the café page. The initial unrelated coffee-counter concept is superseded. No fabricated product price or ranking is inferred from generated images.
 
@@ -85,3 +85,15 @@ Final seahorse: the owner's supplied seahorse pattern is composited into the act
 `snail-wall-authentic.png` / `.webp`: user-supplied photograph, used directly without AI alteration. Lossless WebP conversion only. Replaces the rejected generated wall correction; natural 568 × 558 aspect ratio retained.
 
 - snail-wall-reference-edit.png / .webp: current wall image. AI edit preserving the original oblique landscape angle, using snail-wall-authentic.png as the real-wall reference for the black central brick panel, grey outer brick, greenery and warm lighting along both sides. Supersedes the frontal photograph on the page; all originals retained.
+
+## Creator footer logo
+
+The user supplied `Portfolio/noawezah-logo-kit/svg/noawezah-for-dark-backgrounds.svg`. Its website copy in `public/images/noawezah-for-dark-backgrounds.svg` retains all original paths, colors, and transforms. Only the SVG canvas is trimmed to remove blank margins for the small linked footer credit; the source logo is unchanged.
+
+## Pegasus coffee composite
+
+The owner requested replacing only the existing seahorse foam with the Pegasus milk pattern from `IMG_20260919_174038138_HDR.jpg` (the bottom-left drink), retaining the original golden coffee and creamy foam colors instead of the reference hot chocolate. `pegasus-real-editorial.png` and its lossless `.webp` preserve the original 1536 x 1024 framing. This is a direct photographic alpha composite, not AI generation: the supplied foam is isolated, adapted to the cup perspective, and matched to the original drink tones. The previous foam is repaired using crema samples from the existing photo. The ceramic cup, rim, logo, saucer, lighting, counter and background remain unchanged. Pixel comparison confirms zero changed pixels outside the drink-surface edit mask, and the lossless WebP matches the PNG. Earlier seahorse variants remain archived. This composite is styled imagery, not documentary evidence of a drink served.
+
+## Client brand originals (16 October 2026)
+
+The owner supplied Hurme Geometric Sans 1 OTF fonts and the original Pebble_Logo.pdf/.ai artwork. Current snail.svg, snail-sculpture.svg, pebble-wordmark.svg and pebble-logo-stacked.svg retain the exact original vector curves, without AI or raster tracing. Only their viewports, uniform scale and website palette are adapted. The 3D snail keeps its body/shell/pebble IDs and canonical 250 x 312 coordinates, preserving its choreography. Earlier traced assets are archived. Three supplied font weights (400/600/700) are subset to the website Latin characters and converted losslessly to WOFF2 outlines, retaining standard kerning/ligatures and font name/license metadata. DM Sans supplies missing U+021A/U+021B. Source originals are unchanged. Hashes and file sizes are recorded in docs/client-brand-provenance.json.
