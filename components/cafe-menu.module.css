@@ -215,10 +215,13 @@
   margin-block-end: clamp(18px, 4cqi, 30px);
 }
 
-.foodGroups {
+.pairedGroups {
   display: grid;
-  gap: 20px 30px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 6cqi, 42px);
+}
+
+.pairedGroups .group > h3 {
+  text-align: center;
 }
 
 .foodItem {
@@ -411,7 +414,7 @@
 
 .footer a { min-height: 44px; }
 
-@media (min-width: 701px) and (max-width: 920px) {
+@media (min-width: 701px) and (max-width: 1024px) {
   .index,
   .deck { grid-column: 2 / span 5; }
 }
@@ -423,6 +426,26 @@
 }
 
 @container (max-width: 480px) {
-  .groups,
-  .foodGroups { grid-template-columns: 1fr; }
+  .groups { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 540px) {
+  @container (min-width: 370px) {
+    .pairedGroups .items {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px clamp(8px, 3cqi, 20px);
+      border-top: 0;
+    }
+
+    .pairedGroups .items > li {
+      grid-column: span 2;
+      border-top: 1px solid var(--island-line);
+      border-bottom: 0;
+    }
+
+    .pairedGroups .items > li:last-child:nth-child(odd) {
+      grid-column: 2 / span 2;
+    }
+  }
 }

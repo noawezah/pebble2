@@ -1232,6 +1232,7 @@ html:has(.cafe-header) {
 .pebble-header[data-cafe-page="menu"] .pebble-desktop-nav {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  column-gap: clamp(5px, calc(4vw - 28px), 28px);
 }
 
 .pebble-menu-header-side {
@@ -1247,7 +1248,7 @@ html:has(.cafe-header) {
 
 .cafe .pebble-menu-header-title {
   margin: 0;
-  font-size: clamp(32px, min(4vw, 8svh), 56px);
+  font-size: clamp(29px, min(3.5vw, 7svh), 48px);
   line-height: 0.96;
 }
 

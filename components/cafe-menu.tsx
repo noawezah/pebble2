@@ -132,7 +132,7 @@ export default function CafeMenu({ locale }: { locale: Locale }) {
                       <p><span className={styles.hearts} aria-hidden="true">♥</span> {t.legend}</p>
                     </div>
                   )}
-                  <div className={styles.groups}>
+                  <div className={id === "cocktails" ? styles.pairedGroups : styles.groups}>
                     {menuGroups.filter((group) => groups.some((groupId) => groupId === group.id)).map((group) => (
                       <MenuGroup key={group.id} group={group} locale={locale} />
                     ))}

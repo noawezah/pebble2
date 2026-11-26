@@ -96,7 +96,7 @@ export default function CafeMenuFood({ locale, groups, rail }: {
 
   return (
     <>
-      <div className={styles.foodGroups}>
+      <div className={styles.pairedGroups}>
         {groups.map((group) => (
           <div key={group.title} className={styles.group}>
             <h3>{group.title}</h3>
